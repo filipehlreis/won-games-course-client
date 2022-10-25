@@ -27,7 +27,8 @@
     "./.jest/setup.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    ".next"
   ],
   "types": ["node", "jest", "@testing-library/jest-dom"],
   "experimentalDecorators": true,

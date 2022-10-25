@@ -36,18 +36,16 @@ const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-${({ theme }) => css`
-  html {
-    font-size: 62.5%;
-  }
+  ${({ theme }) => css`
+    html {
+      font-size: 62.5%;
+    }
 
-  body {
-    font-family: ${theme.font.family};
-    font-size: ${theme.font.sizes.medium};
-  }
-`}
-
-
+    body {
+      font-family: ${theme.font.family};
+      font-size: ${theme.font.sizes.medium};
+    }
+  `}
 `;
 
 export default GlobalStyles;
