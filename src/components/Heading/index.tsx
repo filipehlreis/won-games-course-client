@@ -1,9 +1,21 @@
 import * as S from './styles';
 
-export const Heading = () => {
+export type HeadingProps = {
+  children: React.ReactNode;
+  color?: 'white' | 'black';
+  lineLeft?: boolean;
+  lineBottom?: boolean;
+};
+
+export const Heading = ({
+  children,
+  color = 'white',
+  lineLeft = false,
+  lineBottom = false,
+}: HeadingProps) => {
   return (
-    <S.Wrapper>
-      <h1>Heading</h1>
+    <S.Wrapper color={color} lineLeft={lineLeft} lineBottom={lineBottom}>
+      {children}
     </S.Wrapper>
   );
 };
