@@ -29,4 +29,11 @@ describe('<Button />', () => {
       'font-size': '1.6rem',
     });
   });
+
+  it('should render a fullWidth version', () => {
+    renderWithTheme(<Button fullWidth>Buy now</Button>);
+    expect(screen.getByRole('button', { name: /Buy now/i })).toHaveStyle({
+      width: '100%',
+    });
+  });
 });
