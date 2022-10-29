@@ -1007,6 +1007,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.19.0":
+  version "7.20.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.0.tgz#824a9ef325ffde6f78056059db3168c08785e24a"
+  integrity sha512-NDYdls71fTXoU8TZHfbBWg7DiZfNzClcKui/+kyi6ppD2L1qnWW3VV6CjtaBXSUGGhiTWJ6ereOIkUvenif66Q==
+  dependencies:
+    regenerator-runtime "^0.13.10"
+
 "@babel/template@^7.12.7", "@babel/template@^7.18.10", "@babel/template@^7.3.3":
   version "7.18.10"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.18.10.tgz#6f9134835970d1dbf0835c0d100c9f38de0c5e71"
@@ -2764,6 +2771,21 @@
     qs "^6.10.0"
     regenerator-runtime "^0.13.7"
     resolve-from "^5.0.0"
+
+"@styled-icons/material-outlined@^10.46.0":
+  version "10.46.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/material-outlined/-/material-outlined-10.46.0.tgz#ee14a81e26ac0d7780be5109b14456772d79529a"
+  integrity sha512-4TTzv/R/V7yUeO1n4xjlcipLIDBs6RzpMeiF5jrzC2hnaLhF304bV3rPlCPzmlTi433CCWo7cadb0p+tePsvzQ==
+  dependencies:
+    "@babel/runtime" "^7.19.0"
+    "@styled-icons/styled-icon" "^10.7.0"
+
+"@styled-icons/styled-icon@^10.7.0":
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/styled-icon/-/styled-icon-10.7.0.tgz#d6960e719b8567c8d0d3a87c40fb6f5b4952a228"
+  integrity sha512-SCrhCfRyoY8DY7gUkpz+B0RqUg/n1Zaqrr2+YKmK/AyeNfCcoHuP4R9N4H0p/NA1l7PTU10ZkAWSLi68phnAjw==
+  dependencies:
+    "@babel/runtime" "^7.19.0"
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
@@ -10641,6 +10663,11 @@ regenerate-unicode-properties@^10.1.0:
 regenerate@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
+
+regenerator-runtime@^0.13.10:
+  version "0.13.10"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.10.tgz#ed07b19616bcbec5da6274ebc75ae95634bfc2ee"
+  integrity sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==
 
 regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.9"
