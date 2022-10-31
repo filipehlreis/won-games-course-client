@@ -13,7 +13,7 @@ const props = {
 
 describe('<Banner />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<Banner {...props} />);
+    const { container } = renderWithTheme(<Banner {...props} />);
     // verifique se o title existe renderizado (toBeInTheDocument())
     expect(
       screen.getByRole('heading', { name: /defy death/i }),
@@ -26,5 +26,7 @@ describe('<Banner />', () => {
     expect(
       screen.getByRole('img', { name: /defy death/i }),
     ).toBeInTheDocument();
+
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
