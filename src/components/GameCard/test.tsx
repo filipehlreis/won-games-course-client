@@ -36,4 +36,16 @@ describe('<GameCard />', () => {
     // verificar se o botaozinho foi renderizado
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument();
   });
+
+  it('should render price in label', () => {
+    // renderiza o componente
+    // preco nao tenha o corte line-through
+    // preco tenha o background secundario
+  });
+
+  it('should render a line-through in price when promotional', () => {
+    // renderiza o componente (Com promotionalPrice) // 200 reais // 15 reais
+    // preco tenha o corte line-through (200)
+    // preco novo promocional nao vai ter line-through (15)
+  });
 });
