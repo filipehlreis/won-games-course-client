@@ -11,6 +11,14 @@ export default {
     price: 'R$ 235,00',
     promotionalPrice: 'R$ 199,90',
   },
+  argTypes: {
+    onFav: { action: 'clicked' },
+  },
+  parameters: {
+    background: {
+      default: 'dark',
+    },
+  },
 } as Meta;
 
 export const Default: Story<GameCardProps> = (args) => (
