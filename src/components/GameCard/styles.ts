@@ -108,6 +108,7 @@ const priceModifiers = {
     background-color: ${theme.colors.secondary};
     border-radius: ${theme.border.radius};
     margin-right: calc(${theme.spacings.xxsmall} / 2);
+    text-decoration: none;
   `,
   promotional: (theme: DefaultTheme) => css`
     color: ${theme.colors.gray};
