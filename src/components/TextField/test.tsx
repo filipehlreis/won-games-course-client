@@ -3,6 +3,7 @@ import { renderWithTheme } from 'utils/tests/helpers';
 
 import { TextField } from '.';
 import userEvent from '@testing-library/user-event';
+import { Email } from '@styled-icons/material-outlined';
 
 describe('<TextField />', () => {
   it('should render with label', () => {
@@ -61,5 +62,12 @@ describe('<TextField />', () => {
 
     await userEvent.tab();
     expect(input).toHaveFocus();
+  });
+
+  it('should render a icon version', () => {
+    renderWithTheme(<TextField icon={<Email data-testid="icon" />} />);
+
+    expect(screen.queryByLabelText(/label/i)).not.toBeInTheDocument();
+    expect(screen.getByTestId('icon')).toBeInTheDocument();
   });
 });
