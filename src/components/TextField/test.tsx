@@ -119,4 +119,18 @@ describe('<TextField />', () => {
     await userEvent.tab();
     expect(input).not.toHaveFocus();
   });
+
+  it('should renders with error', () => {
+    const { container } = renderWithTheme(
+      <TextField
+        icon={<Email data-testid="icon" />}
+        label="TextField"
+        labelFor="TextField"
+        error="Error message"
+      />,
+    );
+
+    expect(screen.getByText('Error message')).toBeInTheDocument();
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });
