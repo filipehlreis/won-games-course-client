@@ -1,9 +1,9 @@
 import { screen, waitFor } from '@testing-library/react';
 import { renderWithTheme } from 'utils/tests/helpers';
-import userEvent from '@testing-library/user-event';
 
 import theme from 'styles/theme';
 import { Checkbox } from '.';
+import userEvent from '@testing-library/user-event';
 
 describe('<Checkbox />', () => {
   it('should render with label', () => {
@@ -61,5 +61,15 @@ describe('<Checkbox />', () => {
       expect(onCheck).toHaveBeenCalledTimes(1);
     });
     expect(onCheck).toHaveBeenCalledWith(false);
+  });
+
+  it('should be accessible with tab', async () => {
+    renderWithTheme(<Checkbox label="Checkbox" labelFor="Checkbox" />);
+
+    expect(document.body).toHaveFocus();
+
+    await userEvent.tab();
+
+    expect(screen.getByLabelText(/checkbox/i)).toHaveFocus();
   });
 });
