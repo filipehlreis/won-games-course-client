@@ -70,4 +70,12 @@ describe('<TextField />', () => {
     expect(screen.queryByLabelText(/label/i)).not.toBeInTheDocument();
     expect(screen.getByTestId('icon')).toBeInTheDocument();
   });
+
+  it('should render with Icon on the right side', () => {
+    renderWithTheme(
+      <TextField icon={<Email data-testid="icon" />} iconPosition="right" />,
+    );
+
+    expect(screen.getByTestId('icon').parentElement).toHaveStyle({ order: 1 });
+  });
 });
