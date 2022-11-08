@@ -36,5 +36,6 @@ describe('<FormSignIn />', () => {
       'href',
       '/sign-up',
     );
+    expect(screen.getByText(/don't have an account\?/i)).toBeInTheDocument();
   });
 });
