@@ -9,13 +9,15 @@ describe('<FormSignIn />', () => {
     // verifique password
     // verifique button
 
-    renderWithTheme(<FormSignIn />);
+    const { container } = renderWithTheme(<FormSignIn />);
 
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /sign in now/i }),
     ).toBeInTheDocument();
+
+    expect(container.parentElement).toMatchSnapshot();
   });
 
   it('should render the forgot password link', () => {
