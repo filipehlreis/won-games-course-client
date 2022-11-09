@@ -5,7 +5,7 @@ import {
 } from '@styled-icons/material-outlined';
 
 import { Ribbon, RibbonColors, RibbonSizes } from 'components/Ribbon';
-import { Button } from 'components/Button';
+import Button from 'components/Button';
 import * as S from './styles';
 import React from 'react';
 
