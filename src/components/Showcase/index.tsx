@@ -11,7 +11,7 @@ export type ShowcaseProps = {
   games?: GameCardProps[];
 };
 
-export const Showcase = ({ title, highlight, games }: ShowcaseProps) => {
+const Showcase = ({ title, highlight, games }: ShowcaseProps) => {
   return (
     <S.Wrapper>
       {!!title && (
@@ -24,3 +24,5 @@ export const Showcase = ({ title, highlight, games }: ShowcaseProps) => {
     </S.Wrapper>
   );
 };
+
+export default Showcase;

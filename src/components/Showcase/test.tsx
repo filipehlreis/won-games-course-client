@@ -5,7 +5,7 @@ import { renderWithTheme } from 'utils/tests/helpers';
 import highlightMock from 'components/Highlight/mock';
 import gamesMock from 'components/GameCardSlider/mock';
 
-import { Showcase } from '.';
+import Showcase from '.';
 
 const props = {
   title: 'Most Popular',

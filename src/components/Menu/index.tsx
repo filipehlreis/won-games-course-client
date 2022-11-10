@@ -15,7 +15,7 @@ export type MenuProps = {
   username?: string;
 };
 
-export const Menu = ({ username }: MenuProps) => {
+const Menu = ({ username }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -87,3 +87,5 @@ export const Menu = ({ username }: MenuProps) => {
     </S.Wrapper>
   );
 };
+
+export default Menu;

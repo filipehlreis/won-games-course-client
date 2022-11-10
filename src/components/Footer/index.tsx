@@ -3,7 +3,7 @@ import { Logo } from 'components/Logo';
 import Link from 'next/link';
 import * as S from './styles';
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <S.Wrapper>
       <Logo color="black" />
@@ -85,3 +85,4 @@ export const Footer = () => {
     </S.Wrapper>
   );
 };
+export default Footer;

@@ -3,12 +3,12 @@ import { GameCardProps } from 'components/GameCard';
 import { HighlightProps } from 'components/Highlight';
 
 import { Container } from 'components/Container';
-import { Footer } from 'components/Footer';
-import { Menu } from 'components/Menu';
-import { BannerSlider } from 'components/BannerSlider';
+import Footer from 'components/Footer';
+import Menu from 'components/Menu';
+import BannerSlider from 'components/BannerSlider';
 
 import * as S from './styles';
-import { Showcase } from 'components/Showcase';
+import Showcase from 'components/Showcase';
 
 export type HomeTemplateProps = {
   banners: BannerProps[];
