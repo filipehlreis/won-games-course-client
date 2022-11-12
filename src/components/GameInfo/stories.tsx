@@ -5,9 +5,9 @@ export default {
   title: 'GameInfo',
   component: GameInfo,
   args: {
-    title: 'My game info',
-    description: 'My game description',
-    price: 'R$210.00',
+    title: 'My Game Title',
+    description: 'My Game Description',
+    price: '210,00',
   },
 } as Meta;
 
