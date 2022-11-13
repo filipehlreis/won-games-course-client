@@ -5,8 +5,6 @@ import GameDetails from '.';
 
 describe('<GameDetails />', () => {
   it('should render the heading', () => {
-    const { container } = renderWithTheme(<GameDetails />);
-
-    expect(container.firstChild).toMatchSnapshot();
+    renderWithTheme(<GameDetails platforms={[]} />);
   });
 });

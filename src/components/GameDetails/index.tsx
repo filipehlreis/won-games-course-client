@@ -1,8 +1,23 @@
+import { Apple, Windows, Linux } from '@styled-icons/fa-brands';
+
 import { Heading } from 'components/Heading';
 import MediaMatch from 'components/MediaMatch';
+
 import * as S from './styles';
 
-const GameDetails = () => {
+type Platform = 'windows' | 'linux' | 'mac';
+
+export type GameDetailsProps = {
+  platforms: Platform[];
+};
+
+const GameDetails = ({ platforms }: GameDetailsProps) => {
+  const platformIcons = {
+    linux: <Linux title="Linux" size={18} />,
+    windows: <Windows title="Windows" size={18} />,
+    mac: <Apple title="Mac" size={18} />,
+  };
+
   return (
     <S.Wrapper>
       <MediaMatch greaterThan="small">
@@ -24,6 +39,11 @@ const GameDetails = () => {
 
         <S.Block>
           <S.Label>Platforms</S.Label>
+          <S.IconsWrapper>
+            {platforms.map((icon: Platform) => (
+              <S.Icon key={icon}>{platformIcons[icon]}</S.Icon>
+            ))}
+          </S.IconsWrapper>
         </S.Block>
 
         <S.Block>
