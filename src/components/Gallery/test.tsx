@@ -49,8 +49,30 @@ describe('<Gallery />', () => {
     expect(modal.getAttribute('aria-hidden')).toBe('false');
     expect(modal).toHaveStyle({ opacity: 1 });
 
-    // ver
+    // clicar para fechar o modal
     fireEvent.click(screen.getByRole('button', { name: /close modal/i }));
+    expect(modal.getAttribute('aria-hidden')).toBe('true');
+    expect(modal).toHaveStyle({ opacity: 0 });
+  });
+
+  it('should handle close modal when ESC Escape button is pressed', () => {
+    const { container } = renderWithTheme(
+      <Gallery items={mockItems.slice(0, 2)} />,
+    );
+
+    // selecionar o nosso menuFull
+    const modal = screen.getByLabelText('modal');
+
+    // clicar no botao de abrir o modal e verificar se ele abriu
+    fireEvent.click(
+      screen.getByRole('button', { name: /thumb - gallery image 1/i }),
+    );
+    expect(modal.getAttribute('aria-hidden')).toBe('false');
+    expect(modal).toHaveStyle({ opacity: 1 });
+
+    // clicar para fechar o modal
+    fireEvent.keyUp(container, { key: 'Escape' });
+
     expect(modal.getAttribute('aria-hidden')).toBe('true');
     expect(modal).toHaveStyle({ opacity: 0 });
   });
