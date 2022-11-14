@@ -1,5 +1,5 @@
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { Showcase, ShowcaseProps } from '.';
+import Showcase, { ShowcaseProps } from '.';
 
 import highlightMock from 'components/Highlight/mock';
 import gamesMock from 'components/GameCardSlider/mock';
