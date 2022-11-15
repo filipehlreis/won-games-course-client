@@ -1,3 +1,7 @@
+import { useRouter } from 'next/router';
+
 export default function Index() {
-  return <h1>Game!</h1>;
+  const router = useRouter();
+
+  return <h1>{router.asPath}</h1>;
 }
