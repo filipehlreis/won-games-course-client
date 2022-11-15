@@ -5,15 +5,23 @@ import Gallery, { GalleryImageProps } from 'components/Gallery';
 
 import * as S from './styles';
 import TextContent from 'components/TextContent';
+import GameDetails, { GameDetailsProps } from 'components/GameDetails';
 
 export type GameTemplateProps = {
   cover: string;
   gameInfo: GameInfoProps;
   gallery?: GalleryImageProps[];
   description: string;
+  details: GameDetailsProps;
 };
 
-const Game = ({ cover, gameInfo, gallery, description }: GameTemplateProps) => {
+const Game = ({
+  cover,
+  gameInfo,
+  gallery,
+  description,
+  details,
+}: GameTemplateProps) => {
   return (
     <Base>
       <S.Cover src={cover} role="image" aria-label="cover" />
@@ -29,6 +37,10 @@ const Game = ({ cover, gameInfo, gallery, description }: GameTemplateProps) => {
         <S.SectionDescription>
           <TextContent title="Description" content={description} />
         </S.SectionDescription>
+
+        <S.SectionGameDetails>
+          <GameDetails {...details} />
+        </S.SectionGameDetails>
       </S.Main>
     </Base>
   );
