@@ -22,7 +22,7 @@ export type GameCardProps = {
   onFav?: () => void;
 };
 
-export const GameCard = ({
+const GameCard = ({
   title,
   developer,
   img,
@@ -65,3 +65,5 @@ export const GameCard = ({
     </S.Wrapper>
   );
 };
+
+export default GameCard;

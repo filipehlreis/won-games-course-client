@@ -15,7 +15,7 @@ export type GameInfoProps = {
   price: string;
 };
 
-export const GameInfo = ({ title, description, price }: GameInfoProps) => {
+const GameInfo = ({ title, description, price }: GameInfoProps) => {
   return (
     <S.Wrapper>
       <Heading color="black" lineBottom>
@@ -38,3 +38,5 @@ export const GameInfo = ({ title, description, price }: GameInfoProps) => {
     </S.Wrapper>
   );
 };
+
+export default GameInfo;

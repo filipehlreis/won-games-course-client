@@ -11,7 +11,7 @@ export type HighlightProps = {
   alignment?: 'right' | 'left';
 };
 
-export const Highlight = ({
+const Highlight = ({
   title,
   subtitle,
   backgroundImage,
@@ -33,3 +33,5 @@ export const Highlight = ({
     </S.Wrapper>
   );
 };
+
+export default Highlight;
