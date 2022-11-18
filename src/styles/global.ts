@@ -6,6 +6,7 @@ import {
 } from 'styled-components';
 
 type GlobalStylesProps = {
+  theme: DefaultTheme;
   removeBg?: boolean;
 };
 
