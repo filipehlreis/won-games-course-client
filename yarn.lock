@@ -2772,6 +2772,14 @@
     regenerator-runtime "^0.13.7"
     resolve-from "^5.0.0"
 
+"@styled-icons/boxicons-solid@^10.46.0":
+  version "10.46.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/boxicons-solid/-/boxicons-solid-10.46.0.tgz#d2ba65b4ea3dc2e34557e8f8c44c3a066cc2a108"
+  integrity sha512-fXbuFeXmrcHquTqYzRl7a9ZNSqPlr4vgAEItpb8bk/81G3Jo//TJKC0QOtwDtWkeqisx5WFFfpd/7H8D82CSIg==
+  dependencies:
+    "@babel/runtime" "^7.19.0"
+    "@styled-icons/styled-icon" "^10.7.0"
+
 "@styled-icons/fa-brands@^10.46.0":
   version "10.46.0"
   resolved "https://registry.yarnpkg.com/@styled-icons/fa-brands/-/fa-brands-10.46.0.tgz#af11fd39d00616cb74a6925c1bff36f19621bb24"
