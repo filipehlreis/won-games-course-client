@@ -7,7 +7,7 @@ import { Email } from '@styled-icons/material-outlined';
 
 describe('<TextField />', () => {
   it('should render with label', () => {
-    renderWithTheme(<TextField label="Label" labelFor="Field" id="Field" />);
+    renderWithTheme(<TextField label="Label" name="Label" />);
 
     expect(screen.getByLabelText(/label/i)).toBeInTheDocument();
   });
@@ -34,12 +34,7 @@ describe('<TextField />', () => {
     const onInput = jest.fn();
 
     renderWithTheme(
-      <TextField
-        onInput={onInput}
-        label="TextField"
-        labelFor="TextField"
-        id="TextField"
-      />,
+      <TextField onInput={onInput} label="TextField" name="TextField" />,
     );
 
     const input = screen.getByRole('textbox');
@@ -54,9 +49,7 @@ describe('<TextField />', () => {
   });
 
   it('should be accessible with tab', async () => {
-    renderWithTheme(
-      <TextField label="TextField" labelFor="TextField" id="TextField" />,
-    );
+    renderWithTheme(<TextField label="TextField" name="TextField" />);
     const input = screen.getByLabelText('TextField');
     expect(document.body).toHaveFocus();
 
@@ -85,8 +78,7 @@ describe('<TextField />', () => {
       <TextField
         onInput={onInput}
         label="TextField"
-        labelFor="TextField"
-        id="TextField"
+        name="TextField"
         disabled
       />,
     );
@@ -104,14 +96,7 @@ describe('<TextField />', () => {
   });
 
   it('shouldnt be accessible by tab when disabled', async () => {
-    renderWithTheme(
-      <TextField
-        label="TextField"
-        labelFor="TextField"
-        id="TextField"
-        disabled
-      />,
-    );
+    renderWithTheme(<TextField label="TextField" name="TextField" disabled />);
 
     const input = screen.getByLabelText('TextField');
     expect(document.body).toHaveFocus();
@@ -125,7 +110,6 @@ describe('<TextField />', () => {
       <TextField
         icon={<Email data-testid="icon" />}
         label="TextField"
-        labelFor="TextField"
         error="Error message"
       />,
     );
