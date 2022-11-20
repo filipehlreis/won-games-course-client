@@ -1,6 +1,6 @@
 import Base from 'templates/Base';
 
-import { Heading } from 'components/Heading';
+import Heading from 'components/Heading';
 import Showcase from 'components/Showcase';
 import GameCard, { GameCardProps } from 'components/GameCard';
 import { Container } from 'components/Container';

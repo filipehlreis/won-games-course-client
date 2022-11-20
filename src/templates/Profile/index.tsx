@@ -1,7 +1,10 @@
-import { Container } from 'components/Container';
-import { Heading } from 'components/Heading';
-import ProfileMenu from 'components/ProfileMenu';
+import { useRouter } from 'next/router';
+
 import Base from 'templates/Base';
+import { Container } from 'components/Container';
+import Heading from 'components/Heading';
+import ProfileMenu from 'components/ProfileMenu';
+
 import * as S from './styles';
 
 export type ProfileTemplateProps = {
@@ -9,6 +12,8 @@ export type ProfileTemplateProps = {
 };
 
 const Profile = ({ children }: ProfileTemplateProps) => {
+  const { asPath } = useRouter();
+
   return (
     <Base>
       <Container>
@@ -17,7 +22,7 @@ const Profile = ({ children }: ProfileTemplateProps) => {
         </Heading>
 
         <S.Main>
-          <ProfileMenu />
+          <ProfileMenu activeLink={asPath} />
           <S.Content>{children}</S.Content>
         </S.Main>
       </Container>

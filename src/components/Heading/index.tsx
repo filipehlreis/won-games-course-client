@@ -11,7 +11,7 @@ export type HeadingProps = {
   lineColor?: LineColors;
 };
 
-export const Heading = ({
+const Heading = ({
   children,
   color = 'white',
   lineLeft = false,
@@ -31,3 +31,5 @@ export const Heading = ({
     </S.Wrapper>
   );
 };
+
+export default Heading;

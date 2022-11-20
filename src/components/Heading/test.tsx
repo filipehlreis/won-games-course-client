@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import { renderWithTheme } from 'utils/tests/helpers';
 
-import { Heading } from '.';
+import Heading from '.';
 
 describe('<Heading />', () => {
   // renderizar o componente 'render'

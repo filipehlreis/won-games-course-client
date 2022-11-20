@@ -1,7 +1,7 @@
 import Base from 'templates/Base';
 import { Container } from 'components/Container';
 import { Divider } from 'components/Divider';
-import { Heading } from 'components/Heading';
+import Heading from 'components/Heading';
 import { GameCardProps } from 'components/GameCard';
 import { HighlightProps } from 'components/Highlight';
 import PaymentOptions, { PaymentOptionsProp } from 'components/PaymentOptions';
