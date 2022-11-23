@@ -17,12 +17,16 @@ export default {
 } as Meta;
 
 export const Default: Story<ExploreSidebarProps> = (args) => (
-  <ExploreSidebar {...args} />
+  <div style={{ padding: 16, maxWidth: 320 }}>
+    <ExploreSidebar {...args} />
+  </div>
 );
 
 export const WithInitialValues: Story<ExploreSidebarProps> = (args) => (
-  <ExploreSidebar
-    {...args}
-    initialValues={{ windows: true, sort_by: 'low-to-high' }}
-  />
+  <div style={{ padding: 16, maxWidth: 320 }}>
+    <ExploreSidebar
+      {...args}
+      initialValues={{ windows: true, sort_by: 'low-to-high' }}
+    />
+  </div>
 );
