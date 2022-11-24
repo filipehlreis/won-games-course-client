@@ -47,7 +47,7 @@ const ExploreSidebar = ({
 
   return (
     <S.Wrapper isOpen={isOpen}>
-      <S.Overlay aria-hiddn={isOpen} />
+      <S.Overlay aria-hidden={isOpen} />
       <S.IconWrapper>
         <FilterList aria-label="open filters" onClick={() => setIsOpen(true)} />
         <Close aria-label="close filters" onClick={() => setIsOpen(false)} />
