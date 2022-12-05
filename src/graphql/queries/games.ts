@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_GAMES = gql`
-  query QueryGames {
-    games(pagination: { limit: 30 }) {
+  query QueryGames($limit: Int!) {
+    games(pagination: { limit: $limit }) {
       data {
         attributes {
           name
