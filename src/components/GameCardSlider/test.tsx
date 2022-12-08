@@ -6,6 +6,7 @@ import { GameCardSlider } from '.';
 
 const items = [
   {
+    slug: 'population-zero',
     title: 'Population Zero',
     developer: 'Rockstar Games',
     img: 'https://source.unsplash.com/user/willianjusten/300x140',
@@ -13,6 +14,7 @@ const items = [
     promotionalPrice: 'R$ 215,00',
   },
   {
+    slug: 'population-zero',
     title: 'Population Zero',
     developer: 'Rockstar Games',
     img: 'https://source.unsplash.com/user/willianjusten/300x141',
@@ -20,6 +22,7 @@ const items = [
     promotionalPrice: 'R$ 215,00',
   },
   {
+    slug: 'population-zero',
     title: 'Population Zero',
     developer: 'Rockstar Games',
     img: 'https://source.unsplash.com/user/willianjusten/300x142',
@@ -27,6 +30,7 @@ const items = [
     promotionalPrice: 'R$ 215,00',
   },
   {
+    slug: 'population-zero',
     title: 'Population Zero',
     developer: 'Rockstar Games',
     img: 'https://source.unsplash.com/user/willianjusten/300x143',
@@ -34,6 +38,7 @@ const items = [
     promotionalPrice: 'R$ 215,00',
   },
   {
+    slug: 'population-zero',
     title: 'Population Zero',
     developer: 'Rockstar Games',
     img: 'https://source.unsplash.com/user/willianjusten/300x144',
