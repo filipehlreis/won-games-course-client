@@ -8,7 +8,7 @@ const props = {
   title: 'Population Zero',
   developer: 'Rockstar Games',
   img: 'https://source.unsplash.com/user/willianjusten/300x140',
-  price: 'R$ 235,00',
+  price: 235.0,
 };
 
 describe('<GameCard />', () => {
@@ -33,7 +33,7 @@ describe('<GameCard />', () => {
       `/game/${props.slug}`,
     );
 
-    expect(screen.getByText(`${props.price}`)).toBeInTheDocument();
+    expect(screen.getByText(`${'$235.00'}`)).toBeInTheDocument();
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument();
 
     expect(container.firstChild).toMatchSnapshot();
@@ -41,16 +41,16 @@ describe('<GameCard />', () => {
 
   it('should render price in label', () => {
     renderWithTheme(<GameCard {...props} />);
-    const price = screen.getByText(props.price);
+    const price = screen.getByText('$235.00');
 
     expect(price).not.toHaveStyle({ textDecoration: 'line-through' });
     expect(price).toHaveStyle('backgroundColor: #3CD3C1');
   });
 
   it('should render a line-through in price when promotional', () => {
-    renderWithTheme(<GameCard {...props} promotionalPrice="R$ 199,00" />);
-    const price = screen.getByText(props.price);
-    const promotionalPrice = screen.getByText('R$ 199,00');
+    renderWithTheme(<GameCard {...props} promotionalPrice={199.0} />);
+    const price = screen.getByText('$235.00');
+    const promotionalPrice = screen.getByText('$199.00');
 
     expect(price).toHaveStyle({ textDecoration: 'line-through' });
     expect(promotionalPrice).not.toHaveStyle({

@@ -218,7 +218,7 @@ exports[`<GameCard /> should render the heading 1`] = `
       <div
         class="c9"
       >
-        R$ 235,00
+        $235.00
       </div>
       <button
         class="c10"
