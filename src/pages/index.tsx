@@ -1,5 +1,8 @@
 import { Home, HomeTemplateProps } from 'templates/Home';
-import bannersMock from 'components/BannerSlider/mock';
+import { initializeApollo } from 'utils/apollo';
+import { QueryHome } from 'graphql/generated/QueryHome';
+import { QUERY_HOME } from 'graphql/queries/home';
+
 import gamesMock from 'components/GameCardSlider/mock';
 import highlightMock from 'components/Highlight/mock';
 
@@ -12,11 +15,28 @@ export default function Index(props: HomeTemplateProps) {
 // getStaticProps =>> gerar estatico em build time
 // getServerSideProps =>> gerar via ssr a cada request (nunca vai para o bundle do client)
 // getInitialProps =>> gerar via ssr a cada request (vai para o client, faz hydrate do lado do client depois do 1 req)
-export async function getServerSideProps() {
-  // retorno dos dados
+export async function getStaticProps() {
+  const apolloClient = initializeApollo();
+
+  const { data } = await apolloClient.query<QueryHome>({ query: QUERY_HOME });
+
   return {
     props: {
-      banners: bannersMock,
+      revalidate: 60,
+      banners: data.banners!.data.map((banner) => ({
+        img: `http://localhost:1337${
+          banner.attributes!.image.data?.attributes?.url
+        }`,
+        title: banner.attributes!.title,
+        subtitle: banner.attributes!.subtitle,
+        buttonLabel: banner.attributes!.button?.label,
+        buttonLink: banner.attributes!.button?.link,
+        ...(banner.attributes!.ribbon && {
+          ribbon: banner.attributes!.ribbon?.text,
+          ribbonColor: banner.attributes!.ribbon?.color,
+          ribbonSize: banner.attributes!.ribbon?.size,
+        }),
+      })),
       newGames: gamesMock,
       mostPopularHighlight: highlightMock,
       mostPopularGames: gamesMock,
