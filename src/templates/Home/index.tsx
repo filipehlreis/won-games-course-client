@@ -41,7 +41,7 @@ export const Home = ({
       </Container>
 
       <S.SectionNews>
-        <Showcase title="News" games={newGames} />
+        <Showcase title="News" games={newGames} color="black" />
       </S.SectionNews>
 
       <Showcase
