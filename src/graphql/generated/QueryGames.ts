@@ -42,6 +42,7 @@ export interface QueryGames_games_data_attributes {
   name: string;
   slug: string;
   cover: QueryGames_games_data_attributes_cover | null;
+  release_date: any | null;
   developers: QueryGames_games_data_attributes_developers | null;
   price: number;
 }

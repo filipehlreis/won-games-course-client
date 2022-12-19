@@ -56,6 +56,57 @@ export interface QueryHome_banners {
   data: QueryHome_banners_data[];
 }
 
+export interface QueryHome_newGames_data_attributes_cover_data_attributes {
+  __typename: "UploadFile";
+  url: string;
+}
+
+export interface QueryHome_newGames_data_attributes_cover_data {
+  __typename: "UploadFileEntity";
+  attributes: QueryHome_newGames_data_attributes_cover_data_attributes | null;
+}
+
+export interface QueryHome_newGames_data_attributes_cover {
+  __typename: "UploadFileEntityResponse";
+  data: QueryHome_newGames_data_attributes_cover_data | null;
+}
+
+export interface QueryHome_newGames_data_attributes_developers_data_attributes {
+  __typename: "Developer";
+  name: string;
+}
+
+export interface QueryHome_newGames_data_attributes_developers_data {
+  __typename: "DeveloperEntity";
+  attributes: QueryHome_newGames_data_attributes_developers_data_attributes | null;
+}
+
+export interface QueryHome_newGames_data_attributes_developers {
+  __typename: "DeveloperRelationResponseCollection";
+  data: QueryHome_newGames_data_attributes_developers_data[];
+}
+
+export interface QueryHome_newGames_data_attributes {
+  __typename: "Game";
+  name: string;
+  slug: string;
+  cover: QueryHome_newGames_data_attributes_cover | null;
+  release_date: any | null;
+  developers: QueryHome_newGames_data_attributes_developers | null;
+  price: number;
+}
+
+export interface QueryHome_newGames_data {
+  __typename: "GameEntity";
+  attributes: QueryHome_newGames_data_attributes | null;
+}
+
+export interface QueryHome_newGames {
+  __typename: "GameEntityResponseCollection";
+  data: QueryHome_newGames_data[];
+}
+
 export interface QueryHome {
   banners: QueryHome_banners | null;
+  newGames: QueryHome_newGames | null;
 }

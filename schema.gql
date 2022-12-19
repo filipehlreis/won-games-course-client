@@ -267,6 +267,47 @@ type ComponentPageButton {
   link: String!
 }
 
+enum ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT {
+  right
+  left
+}
+
+input ComponentPageHighlightInput {
+  id: ID
+  title: String
+  subtitle: String
+  background: ID
+  floatImage: ID
+  buttonLabel: String
+  buttonLink: String
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT
+}
+
+type ComponentPageHighlight {
+  id: ID!
+  title: String!
+  subtitle: String!
+  background: UploadFileEntityResponse!
+  floatImage: UploadFileEntityResponse
+  buttonLabel: String!
+  buttonLink: String!
+  alignment: ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT
+}
+
+input ComponentPagePopularGamesInput {
+  id: ID
+  title: String
+  highlight: ComponentPageHighlightInput
+  games: [ID]
+}
+
+type ComponentPagePopularGames {
+  id: ID!
+  title: String!
+  highlight: ComponentPageHighlight
+  games(filters: GameFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): GameRelationResponseCollection
+}
+
 enum ENUM_COMPONENTPAGERIBBON_COLOR {
   primary
   secondary
@@ -298,6 +339,18 @@ type ComponentPageRibbon {
   text: String
   color: ENUM_COMPONENTPAGERIBBON_COLOR
   size: ENUM_COMPONENTPAGERIBBON_SIZE
+}
+
+input ComponentPageSectionInput {
+  id: ID
+  title: String
+  highlight: ComponentPageHighlightInput
+}
+
+type ComponentPageSection {
+  id: ID!
+  title: String
+  highlight: ComponentPageHighlight
 }
 
 input UploadFileFiltersInput {
@@ -816,6 +869,33 @@ type GameRelationResponseCollection {
   data: [GameEntity!]!
 }
 
+input HomeInput {
+  newGames: ComponentPageSectionInput
+  upcomingGames: ComponentPageSectionInput
+  freeGames: ComponentPageSectionInput
+  popularGames: ComponentPagePopularGamesInput
+  publishedAt: DateTime
+}
+
+type Home {
+  newGames: ComponentPageSection
+  upcomingGames: ComponentPageSection
+  freeGames: ComponentPageSection
+  popularGames: ComponentPagePopularGames
+  createdAt: DateTime
+  updatedAt: DateTime
+  publishedAt: DateTime
+}
+
+type HomeEntity {
+  id: ID
+  attributes: Home
+}
+
+type HomeEntityResponse {
+  data: HomeEntity
+}
+
 input PlatformFiltersInput {
   id: IDFilterInput
   name: StringFilterInput
@@ -900,7 +980,7 @@ type PublisherEntityResponseCollection {
   meta: ResponseCollectionMeta!
 }
 
-union GenericMorph = ComponentPageButton | ComponentPageRibbon | UploadFile | UploadFolder | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Banner | Category | Developer | Game | Platform | Publisher
+union GenericMorph = ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection | UploadFile | UploadFolder | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Banner | Category | Developer | Game | Home | Platform | Publisher
 
 input FileInfoInput {
   name: String
@@ -983,6 +1063,7 @@ type Query {
   developers(filters: DeveloperFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): DeveloperEntityResponseCollection
   game(id: ID): GameEntityResponse
   games(filters: GameFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): GameEntityResponseCollection
+  home(publicationState: PublicationState = LIVE): HomeEntityResponse
   platform(id: ID): PlatformEntityResponse
   platforms(filters: PlatformFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PlatformEntityResponseCollection
   publisher(id: ID): PublisherEntityResponse
@@ -1009,6 +1090,8 @@ type Mutation {
   createGame(data: GameInput!): GameEntityResponse
   updateGame(id: ID!, data: GameInput!): GameEntityResponse
   deleteGame(id: ID!): GameEntityResponse
+  updateHome(data: HomeInput!): HomeEntityResponse
+  deleteHome: HomeEntityResponse
   createPlatform(data: PlatformInput!): PlatformEntityResponse
   updatePlatform(id: ID!, data: PlatformInput!): PlatformEntityResponse
   deletePlatform(id: ID!): PlatformEntityResponse

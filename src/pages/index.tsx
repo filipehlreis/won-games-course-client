@@ -18,12 +18,14 @@ export default function Index(props: HomeTemplateProps) {
 export async function getStaticProps() {
   const apolloClient = initializeApollo();
 
-  const { data } = await apolloClient.query<QueryHome>({ query: QUERY_HOME });
+  const {
+    data: { banners, newGames },
+  } = await apolloClient.query<QueryHome>({ query: QUERY_HOME });
 
   return {
     props: {
       revalidate: 60,
-      banners: data.banners!.data.map((banner) => ({
+      banners: banners!.data.map((banner) => ({
         img: `http://localhost:1337${
           banner.attributes!.image.data?.attributes?.url
         }`,
@@ -37,7 +39,15 @@ export async function getStaticProps() {
           ribbonSize: banner.attributes!.ribbon?.size,
         }),
       })),
-      newGames: gamesMock,
+      newGames: newGames!.data.map((game) => ({
+        title: game.attributes!.name,
+        slug: game.attributes!.slug,
+        developer: game.attributes!.developers!.data[0].attributes!.name,
+        img: `http://localhost:1337${
+          game.attributes!.cover?.data!.attributes!.url
+        }`,
+        price: game.attributes!.price,
+      })),
       mostPopularHighlight: highlightMock,
       mostPopularGames: gamesMock,
       upcommingGames: gamesMock,

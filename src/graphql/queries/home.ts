@@ -1,14 +1,24 @@
 import { gql } from '@apollo/client';
 import { BannerFragment } from 'graphql/fragments/banner';
+import { GameFragment } from 'graphql/fragments/game';
 
 export const QUERY_HOME = gql`
   query QueryHome {
     banners {
       ...BannerFragment
     }
+
+    newGames: games(
+      filters: { release_date: { lte: "2022-12-18" } }
+      sort: "release_date:desc"
+      pagination: { limit: 8 }
+    ) {
+      ...GameFragment
+    }
   }
 
   ${BannerFragment}
+  ${GameFragment}
 `;
 
 /**
