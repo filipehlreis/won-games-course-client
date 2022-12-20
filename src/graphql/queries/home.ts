@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 import { BannerFragment } from 'graphql/fragments/banner';
-import { GameFragment } from 'graphql/fragments/game';
+import { GameFragment, GameFragmentRelation } from 'graphql/fragments/game';
+import { HighlightFragment } from 'graphql/fragments/highlight';
 
 export const QUERY_HOME = gql`
   query QueryHome {
@@ -31,8 +32,46 @@ export const QUERY_HOME = gql`
     ) {
       ...GameFragment
     }
+
+    sections: home {
+      data {
+        attributes {
+          newGames {
+            title
+            highlight {
+              ...HighlighFragment
+            }
+          }
+          popularGames {
+            title
+            highlight {
+              ...HighlighFragment
+            }
+            games(pagination: { limit: 8 }) {
+              ...GameFragmentRelation
+            }
+          }
+
+          upcomingGames {
+            title
+            highlight {
+              ...HighlighFragment
+            }
+          }
+
+          freeGames {
+            title
+            highlight {
+              ...HighlighFragment
+            }
+          }
+        }
+      }
+    }
   }
 
+  ${GameFragmentRelation}
+  ${HighlightFragment}
   ${BannerFragment}
   ${GameFragment}
 `;
