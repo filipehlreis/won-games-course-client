@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 import media from 'styled-media-query';
 
 import * as HeadingsStyles from 'components/Heading/styles';
-import * as HighlightStyles from 'components/Highlight/styles';
 
 export const Wrapper = styled.main``;
 
@@ -37,13 +36,5 @@ export const SectionNews = styled.div`
         color: ${theme.colors.black};
       }
     `}
-  `}
-`;
-
-export const SectionUpcomming = styled.div`
-  ${({ theme }) => css`
-    ${HighlightStyles.Wrapper} {
-      margin-top: calc(${theme.spacings.xlarge} * 2);
-    }
   `}
 `;

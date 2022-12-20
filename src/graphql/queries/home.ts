@@ -15,6 +15,22 @@ export const QUERY_HOME = gql`
     ) {
       ...GameFragment
     }
+
+    upcomingGames: games(
+      filters: { release_date: { gt: "2022-12-15" } }
+      sort: "release_date:asc"
+      pagination: { limit: 8 }
+    ) {
+      ...GameFragment
+    }
+
+    freeGames: games(
+      filters: { price: { lte: 2 } }
+      sort: "release_date:desc"
+      pagination: { limit: 8 }
+    ) {
+      ...GameFragment
+    }
   }
 
   ${BannerFragment}
