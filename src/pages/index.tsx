@@ -38,6 +38,7 @@ export async function getStaticProps() {
           ribbonSize: banner.attributes!.ribbon?.size,
         }),
       })),
+      newGamesTitle: sections!.data!.attributes!.newGames?.title,
       newGames: newGames!.data.map((game) => ({
         title: game.attributes!.name,
         slug: game.attributes!.slug,
@@ -47,6 +48,7 @@ export async function getStaticProps() {
         }`,
         price: game.attributes!.price,
       })),
+      mostPopularGamesTitle: sections!.data!.attributes!.popularGames?.title,
       mostPopularHighlight: highlightMock,
       mostPopularGames:
         sections!.data!.attributes!.popularGames!.games!.data.map((game) => ({
@@ -58,7 +60,8 @@ export async function getStaticProps() {
           }`,
           price: game.attributes!.price,
         })),
-      upcommingGames: upcomingGames!.data.map((game) => ({
+      upcomingGamesTitle: sections!.data!.attributes!.upcomingGames?.title,
+      upcomingGames: upcomingGames!.data.map((game) => ({
         title: game.attributes!.name,
         slug: game.attributes!.slug,
         developer: game.attributes!.developers!.data[0].attributes!.name,
@@ -67,7 +70,8 @@ export async function getStaticProps() {
         }`,
         price: game.attributes!.price,
       })),
-      upcommingHighlight: highlightMock,
+      upcomingHighlight: highlightMock,
+      freeGamesTitle: sections!.data!.attributes!.freeGames?.title,
       freeGames: freeGames!.data.map((game) => ({
         title: game.attributes!.name,
         slug: game.attributes!.slug,
