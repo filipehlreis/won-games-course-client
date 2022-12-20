@@ -66,10 +66,35 @@ const GameCard = ({
           )}
         </S.FavButton>
         <S.BuyBox>
-          {!!promotionalPrice && (
+          {price === 0 ? (
+            <S.Price>Free</S.Price>
+          ) : (
+            <>
+              {promotionalPrice === 0 ? (
+                <>
+                  <S.Price isPromotional>{formatPrice(price)}</S.Price>
+                  <S.Price>Free</S.Price>
+                </>
+              ) : (
+                <>
+                  {!!promotionalPrice && (
+                    <S.Price isPromotional>{formatPrice(price)}</S.Price>
+                  )}
+                  <S.Price>{formatPrice(promotionalPrice || price)}</S.Price>
+                </>
+              )}
+            </>
+          )}
+
+          {/* {!!promotionalPrice && (
             <S.Price isPromotional>{formatPrice(price)}</S.Price>
           )}
-          <S.Price>{formatPrice(promotionalPrice || price)}</S.Price>
+          <S.Price>{formatPrice(promotionalPrice || price)}</S.Price> */}
+
+          {/* {!!promotionalPrice && (
+            <S.Price isPromotional>{formatPrice(price)}</S.Price>
+          )}
+          <S.Price>{formatPrice(promotionalPrice || price)}</S.Price> */}
           <Button icon={<AddShoppingCart />} size="small" />
         </S.BuyBox>
       </S.Content>
