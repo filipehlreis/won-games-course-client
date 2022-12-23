@@ -39,13 +39,13 @@ export const QUERY_HOME = gql`
           newGames {
             title
             highlight {
-              ...HighlighFragment
+              ...HighlightFragment
             }
           }
           popularGames {
             title
             highlight {
-              ...HighlighFragment
+              ...HighlightFragment
             }
             games(pagination: { limit: 8 }) {
               ...GameFragmentRelation
@@ -55,14 +55,14 @@ export const QUERY_HOME = gql`
           upcomingGames {
             title
             highlight {
-              ...HighlighFragment
+              ...HighlightFragment
             }
           }
 
           freeGames {
             title
             highlight {
-              ...HighlighFragment
+              ...HighlightFragment
             }
           }
         }
