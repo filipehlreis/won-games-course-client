@@ -12,6 +12,9 @@ import {
   QueryGamesBySlugVariables,
 } from 'graphql/generated/QueryGamesBySlug';
 import { GetStaticProps } from 'next';
+import { QueryRecommended } from 'graphql/generated/QueryRecommended';
+import { QUERY_RECOMMENDED } from 'graphql/queries/recommended';
+import { gamesMapper } from 'utils/mappers';
 
 const apolloClient = initializeApollo();
 
@@ -41,6 +44,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // Get game data
   const { data } = await apolloClient.query<
     QueryGamesBySlug,
     QueryGamesBySlugVariables
@@ -54,6 +58,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const game = data.games.data[0].attributes!;
+
+  // get recommended games
+
+  const { data: dataRecommended } = await apolloClient.query<QueryRecommended>({
+    query: QUERY_RECOMMENDED,
+  });
+
+  const recommended = dataRecommended.recommended?.data?.attributes?.section;
 
   return {
     props: {
@@ -83,7 +95,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       },
       upcomingGames: gamesMock,
       upcomingHighlight: highlightMock,
-      recommendedGames: gamesMock,
+      recommendedTitle: recommended?.title,
+      recommendedGames: gamesMapper(recommended?.games),
     },
   };
 };
