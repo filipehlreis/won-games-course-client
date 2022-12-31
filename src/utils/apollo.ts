@@ -19,7 +19,7 @@ function createApolloClient() {
         Query: {
           fields: {
             games: {
-              keyArgs: ['sort', 'where'],
+              keyArgs: ['sort', 'filters'],
               merge: true,
             },
           },
@@ -81,8 +81,7 @@ export function initializeApollo(initialState = {}) {
   const apolloClientGlobal = apolloClient ?? createApolloClient();
 
   // recuperando os dados de cache
-  console.log('intiialstate', initialState);
-  if (initialState) {
+  if (Object.keys(initialState).length) {
     apolloClientGlobal.cache.restore(initialState);
   }
 
