@@ -1,3 +1,9 @@
+/**
+ * TODO: Need to understand and create a proper test for Apollo.
+ * I tried to do alongside the class, but its return a empty body.
+ * Probably it is because of lack of useQuery mock return.
+ */
+
 import { screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { renderWithTheme } from 'utils/tests/helpers';
