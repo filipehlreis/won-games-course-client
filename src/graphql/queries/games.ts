@@ -3,8 +3,17 @@ import { GameFragment } from 'graphql/fragments/game';
 import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames';
 
 export const QUERY_GAMES = gql`
-  query QueryGames($limit: Int!, $start: Int) {
-    games(pagination: { limit: $limit, start: $start }) {
+  query QueryGames(
+    $limit: Int!
+    $start: Int
+    $filters: GameFiltersInput
+    $sort: [String]
+  ) {
+    games(
+      pagination: { limit: $limit, start: $start }
+      filters: $filters
+      sort: $sort
+    ) {
       ...GameFragment
     }
   }
