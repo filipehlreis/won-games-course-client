@@ -5,7 +5,7 @@ import Heading from 'components/Heading';
 import { Radio } from 'components/Radio';
 import xor from 'lodash.xor';
 import { ParsedUrlQueryInput } from 'querystring';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './styles';
 
 export type ItemProps = {
@@ -36,6 +36,13 @@ const ExploreSidebar = ({
   const [values, setValues] = useState(initialValues);
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    onFilter(values);
+    // this method comes from another template
+    // that we dont have access from here
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values]);
+
   const handleRadio = (name: string, value: string | boolean) => {
     setValues((s) => ({ ...s, [name]: value }));
   };
@@ -45,9 +52,8 @@ const ExploreSidebar = ({
     setValues((s) => ({ ...s, [name]: xor(currentList, [value]) }));
   };
 
-  const handleFilter = () => {
+  const handleFilterMenu = () => {
     setIsOpen(false);
-    onFilter(values);
   };
 
   return (
@@ -98,7 +104,7 @@ const ExploreSidebar = ({
       </S.Content>
 
       <S.Footer>
-        <Button fullWidth size="medium" onClick={handleFilter}>
+        <Button fullWidth size="medium" onClick={handleFilterMenu}>
           Filter
         </Button>
       </S.Footer>
