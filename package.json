@@ -78,7 +78,7 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
-    "@yarnpkg/sdks": "^3.0.0-rc.26",
+    "@yarnpkg/sdks": "^3.0.0-rc.35",
     "apollo": "^2.34.0",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.5",
