@@ -40,6 +40,7 @@ const ExploreSidebar = ({
     onFilter(values);
     // this method comes from another template
     // that we dont have access from here
+    console.log(values);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
 
