@@ -34,3 +34,20 @@ export const WithInitialValues: Story<ExploreSidebarProps> = (args) => (
     />
   </div>
 );
+
+import { filterItems } from './mock2';
+
+export const WithInitialValuesAndCorrectView: Story<
+  ExploreSidebarProps
+> = () => (
+  <div style={{ padding: 16, maxWidth: 320 }}>
+    <ExploreSidebar
+      items={filterItems}
+      onFilter={() => console.log('filter')}
+      initialValues={{
+        platforms: ['windows', 'linux'],
+        sort: 'price:asc',
+      }}
+    />
+  </div>
+);
