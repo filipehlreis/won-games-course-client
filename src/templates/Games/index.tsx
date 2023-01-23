@@ -6,10 +6,10 @@ import {
   QueryGames,
   QueryGames_games_data,
 } from '../../graphql/generated/QueryGames';
-import {
-  parseQueryStringToFilter,
-  parseQueryStringToWhere,
-} from 'utils/filter';
+// import {
+//   parseQueryStringToFilter,
+//   parseQueryStringToWhereNew,
+// } from 'utils/filter';
 
 import Base from 'templates/Base';
 import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined';
@@ -31,12 +31,13 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
   const { data, loading, fetchMore } = useQueryGames({
     variables: {
       limit: 15,
-      filters: parseQueryStringToWhere({ queryString: query, filterItems }),
+      // filters: parseQueryStringToWhereNew({ queryString: query, filterItems }),
       sort: query.sort as (string | null)[],
     },
   });
 
   const handleFilter = (items: ParsedUrlQueryInput) => {
+    console.log('items page template', items);
     push({
       pathname: '/games',
       query: items,
@@ -75,10 +76,10 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
     <Base>
       <S.Main>
         <ExploreSidebar
-          initialValues={parseQueryStringToFilter({
-            queryString: query,
-            filterItems,
-          })}
+          // initialValues={parseQueryStringToFilter({
+          //   queryString: query,
+          //   filterItems,
+          // })}
           items={filterItems}
           onFilter={handleFilter}
         />
