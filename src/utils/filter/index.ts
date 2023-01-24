@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { ItemProps } from 'components/ExploreSidebar';
+import { GameFiltersInput } from 'graphql/generated/globalTypes';
 import { ParsedUrlQueryInput } from 'querystring';
-
-// import { xor, xorBy } from 'lodash';
 
 type ParseArgs = {
   queryString: ParsedUrlQueryInput;
@@ -51,52 +50,43 @@ type ParseArgs = {
 //   sort: 'price:asc',
 // };
 
-type platformsProps = {
-  platforms: { name: { containsi: string } }
-}
-
-type categoriesProps = {
-  categories: { name: { containsi: string } }
-}
-
-type filterItemsProps = {
-  price?: { lte: number | string };
-  and?: (platformsProps | categoriesProps)[];
-};
-
 export const parseQueryStringToWhereNew = ({
   queryString,
   // filterItems,
 }: ParseArgs) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const obj: filterItemsProps = {};
+  const obj: GameFiltersInput = {};
 
-  // console.log('queryString dentro da funcao', queryString);
+  console.log('queryString dentro da funcao', queryString);
 
   Object.keys(queryString)
     .filter((item) => item !== 'sort')
     .forEach((key) => {
+
+      // console.log('entrei na funcao parseQueryStringToWhereNew()')
       // const item = filterItems?.find((item) => item.name === key);
       // const isCheckbox = item?.type === 'checkbox';
 
       // console.log('isCheckbox', isCheckbox, 'item', item);
       // console.log('key', key);
       // console.log('item da funcao', item);
-      console.log('queryString[key] da funcao', queryString[key]);
-
+      // console.log('queryString[key] da funcao', queryString[key]);
+      // const queryStringVetor = Array.isArray(queryString[key]) ? queryString[key] : [queryString[key]]
       // ? Object({ and: queryString[key] })
       // obj['and'] = !isCheckbox
       //   ? queryString[key]
       //   : [Object({ [key]: Object({ containsi: queryString[key] }) })];
 
-      key === 'price' && (obj.price = Object({ lte: queryString[key] }));
+      key === 'price' && (obj.price = Object({ lte: Number(queryString[key]) }));
       // key === 'platforms' && (
 
       //   obj.and = Object({ platforms: { containsi: queryString[key] } })
       // );
 
+      const queryStringVetor = Array.isArray(queryString[key]) ? queryString[key] : [queryString[key]]
+
       key === 'categories' && (
-        <[]>queryString[key]).map((value: string) => {
+        <[]>queryStringVetor).map((value: string) => {
           obj.and?.length
             ? obj.and?.push({ categories: { name: { containsi: value } } })
             : obj.and = [{ categories: { name: { containsi: value } } }]
@@ -104,7 +94,7 @@ export const parseQueryStringToWhereNew = ({
         );
 
       key === 'platforms' && (
-        <[]>queryString[key]).map((value: string) => {
+        <[]>queryStringVetor).map((value: string) => {
           obj.and?.length
             ? obj.and?.push({ platforms: { name: { containsi: value } } })
             : obj.and = [{ platforms: { name: { containsi: value } } }]
@@ -131,8 +121,9 @@ export const parseQueryStringToWhereNew = ({
       // console.log('obj[key] da funcao', obj[key]);
     });
 
-  console.log('obj da funcao', JSON.stringify(obj, null, 4));
+  // console.log('obj da funcao', JSON.stringify(obj, null, 4));
 
+  console.log('\n\nimprimindo objeto', JSON.stringify(obj, null, 4))
   return obj;
 };
 
@@ -160,22 +151,23 @@ export const parseQueryStringToWhereNew = ({
 //   return obj;
 // };
 
-// export const parseQueryStringToFilter = ({
-//   queryString,
-//   filterItems,
-// }: ParseArgs) => {
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   const obj: any = {};
+export const parseQueryStringToFilter = ({
+  queryString,
+  filterItems,
+}: ParseArgs) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const obj: any = {};
 
-//   Object.keys(queryString).forEach((key) => {
-//     const item = filterItems?.find((item) => item.name === key);
-//     const isCheckbox = item?.type === 'checkbox';
-//     const isArray = Array.isArray(queryString[key]);
+  Object.keys(queryString).forEach((key) => {
+    const item = filterItems?.find((item) => item.name === key);
+    const isCheckbox = item?.type === 'checkbox';
+    const isArray = Array.isArray(queryString[key]);
 
-//     obj[key] = !isArray && isCheckbox ? [queryString[key]] : queryString[key];
-//   });
-//   return obj;
-// };
+    obj[key] = !isArray && isCheckbox ? [queryString[key]] : queryString[key];
+  });
+
+  return obj;
+};
 
 /**
  *

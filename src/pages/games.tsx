@@ -1,7 +1,7 @@
 import { initializeApollo } from 'utils/apollo';
 import { QUERY_GAMES } from 'graphql/queries/games';
 import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames';
-import { parseQueryStringToWhere } from 'utils/filter';
+import { parseQueryStringToWhereNew } from 'utils/filter';
 import GamesTemplate, { GamesTemplateProps } from 'templates/Games';
 import { GetServerSidePropsContext } from 'next';
 
@@ -18,7 +18,7 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     query: QUERY_GAMES,
     variables: {
       limit: 15,
-      filters: parseQueryStringToWhere({ queryString: query, filterItems }),
+      filters: parseQueryStringToWhereNew({ queryString: query, filterItems }),
       sort: query.sort as (string | null)[],
     },
   });

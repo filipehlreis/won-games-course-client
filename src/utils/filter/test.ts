@@ -1,5 +1,5 @@
 import {
-  // parseQueryStringToFilter,
+  parseQueryStringToFilter,
   // parseQueryStringToWhere,
   parseQueryStringToWhereNew,
 } from '.';
@@ -43,9 +43,8 @@ import { filterItems } from './games_filterItems';
 
 const queryString = {
   price: 100,
-  // platforms: ['mac', 'windows', 'linux'],
   platforms: ['mac', 'windows', 'linux'],
-  categories: ['action'],
+  categories: ['action', 'adventure', 'horror'],
   sort: 'price:asc',
 };
 
@@ -89,6 +88,20 @@ describe('parseQueryStringToWhereNew()', () => {
             },
           },
         },
+        {
+          categories: {
+            name: {
+              containsi: 'adventure',
+            },
+          },
+        },
+        {
+          categories: {
+            name: {
+              containsi: 'horror',
+            },
+          },
+        },
       ],
     });
   });
@@ -123,3 +136,16 @@ describe('parseQueryStringToWhereNew()', () => {
 //     });
 //   });
 // });
+
+describe('parseQueryStringToFilter()', () => {
+  it('should parse queryString to filter values format', () => {
+    const parsedQuery = parseQueryStringToFilter({ queryString, filterItems });
+
+    expect(parsedQuery).toStrictEqual({
+      price: 100,
+      platforms: ['mac', 'windows', 'linux'],
+      categories: ['action', 'adventure', 'horror'],
+      sort: 'price:asc',
+    });
+  });
+});
