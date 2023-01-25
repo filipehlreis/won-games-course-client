@@ -52,20 +52,6 @@ const cache = new InMemoryCache({
 });
 
 describe('<Games />', () => {
-  it('should render loading when starting the template', async () => {
-    const { container } = await renderWithTheme(
-      <MockedProvider mocks={[gamesMock]} addTypename={false} cache={cache}>
-        <Games filterItems={filterItemsMock} />,
-      </MockedProvider>,
-    );
-
-    console.log('container', container.firstChild);
-    screen.debug();
-
-    expect(await screen.findByText(/loading/i)).toBeInTheDocument();
-
-    // expect(await screen.findByText(/loading/i)).toBeInTheDocument();
-  });
   /**/
   // itAsync('should render sections', () => {
   //   const { debug } = renderWithTheme(
@@ -127,7 +113,7 @@ describe('<Games />', () => {
   //   // expect(screen.findByText(/Price/i)).toBeInTheDocument();
   //   // expect(screen.getByTestId('Mock GameCard')).toBeInTheDocument();
   //   debug();
-  //   // expect(screen.getByText(/loading/i)).toBeInTheDocument();
+  //   // expect(screen.getByText(/loading/i)).toBeInTheDocument(); // remover tambem pois foi removido o loading
   //   expect(screen.findByText(/loading/i)).toBeInTheDocument();
   //   expect(screen.findByText(/The Evil Within Bundle/i)).toBeInTheDocument();
   //   // expect(
