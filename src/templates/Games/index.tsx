@@ -37,7 +37,6 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
   });
 
   const handleFilter = (items: ParsedUrlQueryInput) => {
-    console.log('items page template', items);
     push({
       pathname: '/games',
       query: items,
@@ -52,7 +51,15 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
     // https://stackoverflow.com/questions/62558430/how-does-fetchmore-return-data-to-the-component
     fetchMore({
       query: QUERY_GAMES,
-      variables: { limit: 15, start: currentLength },
+      variables: {
+        limit: 15,
+        filters: parseQueryStringToWhereNew({
+          queryString: query,
+          filterItems,
+        }),
+        sort: query.sort as (string | null)[],
+        start: currentLength,
+      },
       updateQuery: (previousResult, { fetchMoreResult }): QueryGames => {
         const previousData: QueryGames_games_data[] =
           previousResult.games?.data || [];
