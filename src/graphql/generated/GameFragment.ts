@@ -7,6 +7,16 @@
 // GraphQL fragment: GameFragment
 // ====================================================
 
+export interface GameFragment_meta_pagination {
+  __typename: "Pagination";
+  total: number;
+}
+
+export interface GameFragment_meta {
+  __typename: "ResponseCollectionMeta";
+  pagination: GameFragment_meta_pagination;
+}
+
 export interface GameFragment_data_attributes_cover_data_attributes {
   __typename: "UploadFile";
   url: string;
@@ -54,5 +64,6 @@ export interface GameFragment_data {
 
 export interface GameFragment {
   __typename: "GameEntityResponseCollection";
+  meta: GameFragment_meta;
   data: GameFragment_data[];
 }

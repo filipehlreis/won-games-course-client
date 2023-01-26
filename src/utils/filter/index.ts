@@ -57,7 +57,7 @@ export const parseQueryStringToWhereNew = ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const obj: GameFiltersInput = {};
 
-  console.log('queryString dentro da funcao', queryString);
+  // console.log('queryString dentro da funcao', queryString);
 
   Object.keys(queryString)
     .filter((item) => item !== 'sort')
@@ -123,7 +123,7 @@ export const parseQueryStringToWhereNew = ({
 
   // console.log('obj da funcao', JSON.stringify(obj, null, 4));
 
-  console.log('\n\nimprimindo objeto', JSON.stringify(obj, null, 4))
+  // console.log('\n\nimprimindo objeto', JSON.stringify(obj, null, 4))
   return obj;
 };
 

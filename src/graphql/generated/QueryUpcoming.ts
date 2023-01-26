@@ -9,6 +9,16 @@ import { ENUM_COMPONENTPAGEHIGHLIGHT_ALIGNMENT } from "./globalTypes";
 // GraphQL query operation: QueryUpcoming
 // ====================================================
 
+export interface QueryUpcoming_upcomingGames_meta_pagination {
+  __typename: "Pagination";
+  total: number;
+}
+
+export interface QueryUpcoming_upcomingGames_meta {
+  __typename: "ResponseCollectionMeta";
+  pagination: QueryUpcoming_upcomingGames_meta_pagination;
+}
+
 export interface QueryUpcoming_upcomingGames_data_attributes_cover_data_attributes {
   __typename: "UploadFile";
   url: string;
@@ -56,6 +66,7 @@ export interface QueryUpcoming_upcomingGames_data {
 
 export interface QueryUpcoming_upcomingGames {
   __typename: "GameEntityResponseCollection";
+  meta: QueryUpcoming_upcomingGames_meta;
   data: QueryUpcoming_upcomingGames_data[];
 }
 

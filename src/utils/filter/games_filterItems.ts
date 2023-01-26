@@ -8,7 +8,7 @@ const filterPrice = {
     { label: 'Under $100', name: 100 },
     { label: 'Under $150', name: 150 },
     { label: 'Under $250', name: 250 },
-    { label: 'Under $500', name: 500 },
+    { label: 'Under $600', name: 600 },
   ],
 };
 

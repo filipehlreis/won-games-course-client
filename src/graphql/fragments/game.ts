@@ -2,6 +2,11 @@ import { gql } from '@apollo/client';
 
 export const GameFragment = gql`
   fragment GameFragment on GameEntityResponseCollection {
+    meta {
+      pagination {
+        total
+      }
+    }
     data {
       attributes {
         name

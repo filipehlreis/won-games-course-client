@@ -56,6 +56,16 @@ export interface QueryHome_banners {
   data: QueryHome_banners_data[];
 }
 
+export interface QueryHome_newGames_meta_pagination {
+  __typename: "Pagination";
+  total: number;
+}
+
+export interface QueryHome_newGames_meta {
+  __typename: "ResponseCollectionMeta";
+  pagination: QueryHome_newGames_meta_pagination;
+}
+
 export interface QueryHome_newGames_data_attributes_cover_data_attributes {
   __typename: "UploadFile";
   url: string;
@@ -103,7 +113,18 @@ export interface QueryHome_newGames_data {
 
 export interface QueryHome_newGames {
   __typename: "GameEntityResponseCollection";
+  meta: QueryHome_newGames_meta;
   data: QueryHome_newGames_data[];
+}
+
+export interface QueryHome_upcomingGames_meta_pagination {
+  __typename: "Pagination";
+  total: number;
+}
+
+export interface QueryHome_upcomingGames_meta {
+  __typename: "ResponseCollectionMeta";
+  pagination: QueryHome_upcomingGames_meta_pagination;
 }
 
 export interface QueryHome_upcomingGames_data_attributes_cover_data_attributes {
@@ -153,7 +174,18 @@ export interface QueryHome_upcomingGames_data {
 
 export interface QueryHome_upcomingGames {
   __typename: "GameEntityResponseCollection";
+  meta: QueryHome_upcomingGames_meta;
   data: QueryHome_upcomingGames_data[];
+}
+
+export interface QueryHome_freeGames_meta_pagination {
+  __typename: "Pagination";
+  total: number;
+}
+
+export interface QueryHome_freeGames_meta {
+  __typename: "ResponseCollectionMeta";
+  pagination: QueryHome_freeGames_meta_pagination;
 }
 
 export interface QueryHome_freeGames_data_attributes_cover_data_attributes {
@@ -203,6 +235,7 @@ export interface QueryHome_freeGames_data {
 
 export interface QueryHome_freeGames {
   __typename: "GameEntityResponseCollection";
+  meta: QueryHome_freeGames_meta;
   data: QueryHome_freeGames_data[];
 }
 

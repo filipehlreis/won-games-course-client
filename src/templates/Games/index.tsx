@@ -35,8 +35,11 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
       limit: 15,
       filters: parseQueryStringToWhereNew({ queryString: query, filterItems }),
       sort: query.sort as (string | null)[],
+      start: 0,
     },
   });
+
+  if (!data?.games?.data) return <p>loading ...</p>;
 
   const handleFilter = (items: ParsedUrlQueryInput) => {
     push({
@@ -45,10 +48,18 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
     });
     return;
   };
+  /**
+   * Need to test the updateQuery, it's comming [] for previousData
+   *
+   *
+   */
+  const dataLength = data?.games?.data?.length || 0;
+  const totalPagination = data?.games?.meta.pagination.total || 0;
+  const hasMoreGames = dataLength < totalPagination;
 
   const handleShowMore = () => {
-    const currentLength = data?.games?.data?.length || 0;
-    // console.log(currentLength);
+    const currentLength = data!.games!.data!.length || 0;
+    console.log('currentLength', currentLength);
 
     // https://stackoverflow.com/questions/62558430/how-does-fetchmore-return-data-to-the-component
     fetchMore({
@@ -63,18 +74,28 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
         start: currentLength,
       },
       updateQuery: (previousResult, { fetchMoreResult }): QueryGames => {
+        if (!fetchMoreResult) return previousResult;
+
         const previousData: QueryGames_games_data[] =
           previousResult.games?.data || [];
-        const newData = fetchMoreResult.games?.data || [];
+        console.log('previousData,:', previousData);
 
-        const objectGames = {
+        const newData = fetchMoreResult.games?.data || [];
+        console.log('newData,:', newData);
+
+        const newMeta = fetchMoreResult.games!.meta;
+
+        const objectGames: QueryGames = {
           games: {
-            __typename: previousResult.games!.__typename,
+            meta: newMeta,
+            // __typename: previousResult.games!.__typename,
+            __typename: 'GameEntityResponseCollection',
+            // __typename: 'GameEntityResponseCollection',
             data: [...previousData, ...newData],
           },
         };
 
-        console.log(objectGames);
+        console.log('objectGames', objectGames);
 
         return objectGames;
       },
@@ -94,7 +115,11 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
         />
 
         <section>
-          {data?.games?.data.length ? (
+          <span style={{ color: 'red' }}>
+            {totalPagination} jogos encontrados
+          </span>
+
+          {data!.games!.data.length ? (
             <>
               <Grid>
                 <>
@@ -114,20 +139,21 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
                   ))}
                 </>
               </Grid>
-
-              <S.ShowMore>
-                {loading ? (
-                  <S.ShowMoreLoading
-                    src="/img/dots.svg"
-                    alt="Loading more games..."
-                  />
-                ) : (
-                  <S.ShowMoreButton role="button" onClick={handleShowMore}>
-                    <p>Show More</p>
-                    <ArrowDown size={35} />
-                  </S.ShowMoreButton>
-                )}
-              </S.ShowMore>
+              {hasMoreGames && (
+                <S.ShowMore>
+                  {loading ? (
+                    <S.ShowMoreLoading
+                      src="/img/dots.svg"
+                      alt="Loading more games..."
+                    />
+                  ) : (
+                    <S.ShowMoreButton role="button" onClick={handleShowMore}>
+                      <p>Show More</p>
+                      <ArrowDown size={35} />
+                    </S.ShowMoreButton>
+                  )}
+                </S.ShowMore>
+              )}
             </>
           ) : (
             <Empty

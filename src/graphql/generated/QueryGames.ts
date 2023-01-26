@@ -9,6 +9,16 @@ import { GameFiltersInput } from "./globalTypes";
 // GraphQL query operation: QueryGames
 // ====================================================
 
+export interface QueryGames_games_meta_pagination {
+  __typename: "Pagination";
+  total: number;
+}
+
+export interface QueryGames_games_meta {
+  __typename: "ResponseCollectionMeta";
+  pagination: QueryGames_games_meta_pagination;
+}
+
 export interface QueryGames_games_data_attributes_cover_data_attributes {
   __typename: "UploadFile";
   url: string;
@@ -56,6 +66,7 @@ export interface QueryGames_games_data {
 
 export interface QueryGames_games {
   __typename: "GameEntityResponseCollection";
+  meta: QueryGames_games_meta;
   data: QueryGames_games_data[];
 }
 
