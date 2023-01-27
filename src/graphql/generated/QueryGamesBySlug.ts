@@ -118,6 +118,7 @@ export interface QueryGamesBySlug_games_data_attributes {
 
 export interface QueryGamesBySlug_games_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: QueryGamesBySlug_games_data_attributes | null;
 }
 

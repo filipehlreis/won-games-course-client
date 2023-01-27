@@ -19,7 +19,8 @@ export async function getServerSideProps({ query }: GetServerSidePropsContext) {
     variables: {
       limit: 15,
       filters: parseQueryStringToWhereNew({ queryString: query, filterItems }),
-      sort: query.sort as (string | null)[],
+      sort: ['price:desc', 'id:asc'],
+      // sort: query.sort as (string | null)[],
     },
   });
 

@@ -10,7 +10,7 @@ import { InMemoryCache } from '@apollo/client';
 
 import { renderWithTheme } from 'utils/tests/helpers';
 import filterItemsMock from 'components/ExploreSidebar/mock';
-import { fetchMoreMock, gamesMock } from './mocks';
+import { fetchMoreMock, gamesMock, noGamesMock } from './mocks';
 
 import userEvent from '@testing-library/user-event';
 import Games from '.';
@@ -123,7 +123,7 @@ describe('<Games />', () => {
 
   it('should render empty when no games found', async () => {
     renderWithTheme(
-      <MockedProvider mocks={[]} addTypename={false} cache={cache}>
+      <MockedProvider mocks={[noGamesMock]} addTypename={false} cache={cache}>
         <Games filterItems={filterItemsMock} />,
       </MockedProvider>,
     );

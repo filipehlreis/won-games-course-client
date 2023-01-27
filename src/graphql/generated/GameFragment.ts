@@ -59,6 +59,7 @@ export interface GameFragment_data_attributes {
 
 export interface GameFragment_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: GameFragment_data_attributes | null;
 }
 

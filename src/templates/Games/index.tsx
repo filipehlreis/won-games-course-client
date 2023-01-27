@@ -11,6 +11,8 @@ import {
   parseQueryStringToWhereNew,
 } from 'utils/filter';
 
+import xor from 'lodash.xor';
+
 import Base from 'templates/Base';
 import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined';
 
@@ -34,8 +36,8 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
     variables: {
       limit: 15,
       filters: parseQueryStringToWhereNew({ queryString: query, filterItems }),
-      sort: query.sort as (string | null)[],
-      start: 0,
+      sort: ['price:desc', 'id:asc'],
+      // sort: query.sort as (string | null)[],
     },
   });
 
@@ -70,28 +72,36 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
           queryString: query,
           filterItems,
         }),
-        sort: query.sort as (string | null)[],
+        sort: ['price:desc', 'id:asc'],
+        // sort: query.sort as (string | null)[],
         start: currentLength,
       },
       updateQuery: (previousResult, { fetchMoreResult }): QueryGames => {
         if (!fetchMoreResult) return previousResult;
 
+        // console.log('currentLength', currentLength);
+
         const previousData: QueryGames_games_data[] =
-          previousResult.games?.data || [];
-        console.log('previousData,:', previousData);
+          previousResult.games?.data || data.games?.data || [];
+        // console.log('previousData,:', previousData);
 
         const newData = fetchMoreResult.games?.data || [];
-        console.log('newData,:', newData);
+
+        // console.log('newData,:', newData);
 
         const newMeta = fetchMoreResult.games!.meta;
 
+        const newUniqueData = xor(previousData, newData);
+
+        // const newnewnenwData = [...previousData, ...newNewData];
+
         const objectGames: QueryGames = {
           games: {
+            __typename: 'GameEntityResponseCollection',
             meta: newMeta,
             // __typename: previousResult.games!.__typename,
-            __typename: 'GameEntityResponseCollection',
             // __typename: 'GameEntityResponseCollection',
-            data: [...previousData, ...newData],
+            data: newUniqueData,
           },
         };
 

@@ -61,6 +61,7 @@ export interface QueryUpcoming_upcomingGames_data_attributes {
 
 export interface QueryUpcoming_upcomingGames_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: QueryUpcoming_upcomingGames_data_attributes | null;
 }
 

@@ -108,6 +108,7 @@ export interface QueryHome_newGames_data_attributes {
 
 export interface QueryHome_newGames_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: QueryHome_newGames_data_attributes | null;
 }
 
@@ -169,6 +170,7 @@ export interface QueryHome_upcomingGames_data_attributes {
 
 export interface QueryHome_upcomingGames_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: QueryHome_upcomingGames_data_attributes | null;
 }
 
@@ -230,6 +232,7 @@ export interface QueryHome_freeGames_data_attributes {
 
 export interface QueryHome_freeGames_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: QueryHome_freeGames_data_attributes | null;
 }
 

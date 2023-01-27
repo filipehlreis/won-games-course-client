@@ -8,6 +8,7 @@ export const GameFragment = gql`
       }
     }
     data {
+      id
       attributes {
         name
         slug

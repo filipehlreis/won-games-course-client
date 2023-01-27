@@ -28,6 +28,22 @@ export const gamesMock = {
   },
 };
 
+export const noGamesMock = {
+  request: {
+    query: QUERY_GAMES,
+    variables: { limit: 15, filter: {} },
+  },
+  result: {
+    data: {
+      games: [],
+      gamesConnection: {
+        values: [],
+        __typename: 'GameConnection',
+      },
+    },
+  },
+};
+
 export const fetchMoreMock = {
   request: {
     query: QUERY_GAMES,
@@ -52,6 +68,10 @@ export const fetchMoreMock = {
           __typename: 'Game',
         },
       ],
+      gamesConnection: {
+        values: [{ id: '1' }, { id: '2' }],
+        __typename: 'GameConnection',
+      },
     },
   },
 };

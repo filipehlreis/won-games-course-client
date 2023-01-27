@@ -61,6 +61,7 @@ export interface QueryGames_games_data_attributes {
 
 export interface QueryGames_games_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: QueryGames_games_data_attributes | null;
 }
 

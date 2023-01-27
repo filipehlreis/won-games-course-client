@@ -8,6 +8,25 @@ type ParseArgs = {
   filterItems: Pick<ItemProps, 'type' | 'name'>[];
 };
 
+
+
+/**
+ *
+ *
+ * TODO: It's necessary to create a Sort method to fix the duplicated results
+ * when fetching more games.
+ *
+ *
+ *
+ *
+ */
+
+
+
+
+
+
+
 /**
  *
  * queryString
