@@ -13,7 +13,11 @@ module.exports = {
     '!src/pages/**/*.tsx',
     '!src/styles/**/*.ts',
     '!src/utils/apollo.ts',
+    '!src/utils/apolloCache.ts',
     '!src/types/**/*.ts',
+    '!src/graphql/**/*.ts',
+    '!src/**/mock.ts',
+    '!src/**/mock2.ts',
   ],
   modulePaths: ['<rootDir>/src/', '<rootDir>/.jest'],
 };
