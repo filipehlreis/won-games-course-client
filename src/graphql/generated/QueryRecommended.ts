@@ -92,6 +92,7 @@ export interface QueryRecommended_recommended_data_attributes_section_games_data
 
 export interface QueryRecommended_recommended_data_attributes_section_games_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: QueryRecommended_recommended_data_attributes_section_games_data_attributes | null;
 }
 

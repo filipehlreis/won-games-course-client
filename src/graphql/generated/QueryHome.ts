@@ -372,6 +372,7 @@ export interface QueryHome_sections_data_attributes_popularGames_games_data_attr
 
 export interface QueryHome_sections_data_attributes_popularGames_games_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: QueryHome_sections_data_attributes_popularGames_games_data_attributes | null;
 }
 

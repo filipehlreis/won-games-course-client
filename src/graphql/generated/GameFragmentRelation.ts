@@ -49,6 +49,7 @@ export interface GameFragmentRelation_data_attributes {
 
 export interface GameFragmentRelation_data {
   __typename: "GameEntity";
+  id: string | null;
   attributes: GameFragmentRelation_data_attributes | null;
 }
 

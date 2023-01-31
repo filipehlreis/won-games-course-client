@@ -36,6 +36,7 @@ export const GameFragment = gql`
 export const GameFragmentRelation = gql`
   fragment GameFragmentRelation on GameRelationResponseCollection {
     data {
+      id
       attributes {
         name
         slug
