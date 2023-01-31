@@ -24,13 +24,14 @@ export async function getStaticProps() {
     variables: {
       date: TODAY,
     },
+    fetchPolicy: 'no-cache', // garantir sempre dado novo na geracao do estatico!
   });
 
   const sectionsHome = sections!.data!.attributes;
 
   return {
+    revalidate: 60,
     props: {
-      revalidate: 60,
       banners: bannerMapper(banners!),
       newGamesTitle: sectionsHome!.newGames?.title,
       newGames: gamesMapper(newGames),
