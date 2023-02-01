@@ -47,6 +47,27 @@ describe('<GameCard />', () => {
     expect(price).toHaveStyle('backgroundColor: #3CD3C1');
   });
 
+  it('should render FREE in price label', () => {
+    renderWithTheme(<GameCard {...props} price={0.0} />);
+    const price = screen.getByText('Free');
+
+    expect(price).not.toHaveStyle({ textDecoration: 'line-through' });
+    expect(price).toHaveStyle('backgroundColor: #3CD3C1');
+  });
+
+  it('should render FREE in promotional price label', () => {
+    renderWithTheme(<GameCard {...props} promotionalPrice={0.0} />);
+    const promotionalPrice = screen.getByText('Free');
+    const price = screen.getByText('$235.00');
+
+    expect(price).toHaveStyle({ textDecoration: 'line-through' });
+
+    expect(promotionalPrice).not.toHaveStyle({
+      textDecoration: 'line-through',
+    });
+    expect(promotionalPrice).toHaveStyle('backgroundColor: #3CD3C1');
+  });
+
   it('should render a line-through in price when promotional', () => {
     renderWithTheme(<GameCard {...props} promotionalPrice={199.0} />);
     const price = screen.getByText('$235.00');
