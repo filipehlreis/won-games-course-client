@@ -1,9 +1,9 @@
-import { QueryGames_games } from 'graphql/generated/QueryGames';
+import { QueryGames_games } from '../../graphql/generated/QueryGames';
 import {
   QueryHome_banners,
   QueryHome_sections_data_attributes_freeGames_highlight,
   QueryHome_sections_data_attributes_popularGames_games,
-} from 'graphql/generated/QueryHome';
+} from '../../graphql/generated/QueryHome';
 
 export const bannerMapper = (banners: QueryHome_banners) => {
   return banners!.data.map((banner) => ({
@@ -29,18 +29,18 @@ export const gamesMapper = (
     | null
     | undefined,
 ) => {
-  return (
-    games &&
-    games.data.map((game) => ({
-      title: game.attributes!.name,
-      slug: game.attributes!.slug,
-      developer: game.attributes!.developers!.data[0].attributes!.name,
-      img: `http://localhost:1337${
-        game.attributes!.cover?.data!.attributes!.url
-      }`,
-      price: game.attributes!.price,
-    }))
-  );
+  return games
+    ? games.data.map((game) => ({
+        id: game.id,
+        title: game.attributes!.name,
+        slug: game.attributes!.slug,
+        developer: game.attributes!.developers!.data[0].attributes!.name,
+        img: `http://localhost:1337${
+          game.attributes!.cover?.data!.attributes!.url
+        }`,
+        price: game.attributes!.price,
+      }))
+    : [];
 };
 
 export const highlightMapper = (
@@ -49,15 +49,15 @@ export const highlightMapper = (
     | null
     | undefined,
 ) => {
-  return (
-    highlight && {
-      title: highlight.title,
-      subtitle: highlight.subtitle,
-      backgroundImage: `http://localhost:1337${highlight.background.data?.attributes?.url}`,
-      floatImage: `http://localhost:1337${highlight.floatImage?.data?.attributes?.url}`,
-      buttonLabel: highlight.buttonLabel,
-      buttonLink: highlight.buttonLink,
-      alignment: highlight.alignment,
-    }
-  );
+  return highlight
+    ? {
+        title: highlight.title,
+        subtitle: highlight.subtitle,
+        backgroundImage: `http://localhost:1337${highlight.background.data?.attributes?.url}`,
+        floatImage: `http://localhost:1337${highlight.floatImage?.data?.attributes?.url}`,
+        buttonLabel: highlight.buttonLabel,
+        buttonLink: highlight.buttonLink,
+        alignment: highlight.alignment,
+      }
+    : {};
 };
