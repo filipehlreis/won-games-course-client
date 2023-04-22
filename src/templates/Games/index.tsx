@@ -36,8 +36,8 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
     variables: {
       limit: 15,
       filters: parseQueryStringToWhereNew({ queryString: query, filterItems }),
-      sort: ['price:desc', 'id:asc'],
-      // sort: query.sort as (string | null)[],
+      // sort: ['price:desc', 'id:asc'],
+      sort: query.sort as (string | null)[],
     },
   });
 

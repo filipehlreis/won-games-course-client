@@ -4,7 +4,7 @@ import { QueryGames, QueryGamesVariables } from 'graphql/generated/QueryGames';
 
 export const QUERY_GAMES = gql`
   query QueryGames(
-    $limit: Int!
+    $limit: Int
     $start: Int
     $filters: GameFiltersInput
     $sort: [String]

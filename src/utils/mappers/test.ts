@@ -1,4 +1,5 @@
-import { bannerMapper, gamesMapper, highlightMapper } from '.';
+import { bannerMapper, cartMapper, gamesMapper, highlightMapper } from '.';
+import { QueryGames } from '../../graphql/generated/QueryGames';
 import { QueryGames_games } from '../../graphql/generated/QueryGames';
 import {
   QueryHome_banners,
@@ -136,5 +137,128 @@ describe('highlightMapper()', () => {
       buttonLink: 'button link',
       alignment: 'left',
     });
+  });
+});
+
+describe('cartMapper()', () => {
+  it('should return empty array if no games', () => {
+    expect(cartMapper(undefined)).toStrictEqual([]);
+  });
+
+  it('should return mapped items', () => {
+    const game = {
+      games: {
+        data: [
+          {
+            id: '1',
+            attributes: {
+              name: 'Sample Game 1',
+              slug: 'sample_game_1',
+              short_description: 'Sample description 1',
+              price: 9.9,
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'sample developer 1',
+                    },
+                  },
+                ],
+              },
+              cover: {
+                data: {
+                  attributes: {
+                    url: '/sample_game_1.jpg',
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    } as unknown as QueryGames_games;
+
+    expect(cartMapper(game)).toStrictEqual([
+      {
+        id: '1',
+        img: 'http://localhost:1337/sample_game_1.jpg',
+        title: 'Sample Game 1',
+        price: '$9.90',
+      },
+    ]);
+  });
+
+  it('should return mapped 2 items', () => {
+    const game = {
+      games: {
+        data: [
+          {
+            id: '1',
+            attributes: {
+              name: 'Sample Game 1',
+              slug: 'sample_game_1',
+              short_description: 'Sample description 1',
+              price: 9.9,
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'sample developer 1',
+                    },
+                  },
+                ],
+              },
+              cover: {
+                data: {
+                  attributes: {
+                    url: '/sample_game_1.jpg',
+                  },
+                },
+              },
+            },
+          },
+          {
+            id: '2',
+            attributes: {
+              name: 'Sample Game 2',
+              slug: 'sample_game_2',
+              short_description: 'Sample description 2',
+              price: 9.9,
+              developers: {
+                data: [
+                  {
+                    attributes: {
+                      name: 'sample developer 2',
+                    },
+                  },
+                ],
+              },
+              cover: {
+                data: {
+                  attributes: {
+                    url: '/sample_game_2.jpg',
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    } as unknown as QueryGames;
+
+    expect(cartMapper(game)).toStrictEqual([
+      {
+        id: '1',
+        img: 'http://localhost:1337/sample_game_1.jpg',
+        title: 'Sample Game 1',
+        price: '$9.90',
+      },
+      {
+        id: '2',
+        img: 'http://localhost:1337/sample_game_2.jpg',
+        title: 'Sample Game 2',
+        price: '$9.90',
+      },
+    ]);
   });
 });

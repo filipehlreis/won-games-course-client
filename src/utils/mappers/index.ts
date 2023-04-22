@@ -1,4 +1,8 @@
-import { QueryGames_games } from '../../graphql/generated/QueryGames';
+import formatPrice from 'utils/format-price';
+import {
+  QueryGames,
+  QueryGames_games,
+} from '../../graphql/generated/QueryGames';
 import {
   QueryHome_banners,
   QueryHome_sections_data_attributes_freeGames_highlight,
@@ -60,4 +64,17 @@ export const highlightMapper = (
         alignment: highlight.alignment,
       }
     : {};
+};
+
+export const cartMapper = (games: QueryGames | undefined) => {
+  return games?.games
+    ? games.games.data.map((game) => ({
+        id: game.id!,
+        img: `http://localhost:1337${
+          game.attributes!.cover!.data!.attributes?.url
+        }`,
+        title: game.attributes!.name,
+        price: formatPrice(game.attributes!.price),
+      }))
+    : [];
 };
