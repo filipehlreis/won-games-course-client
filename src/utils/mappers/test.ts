@@ -176,7 +176,7 @@ describe('cartMapper()', () => {
           },
         ],
       },
-    } as unknown as QueryGames_games;
+    } as unknown as QueryGames;
 
     expect(cartMapper(game)).toStrictEqual([
       {

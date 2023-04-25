@@ -135,6 +135,7 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
                 <>
                   {data?.games?.data.map((game) => (
                     <GameCard
+                      id={game.id!}
                       key={game.attributes!.slug}
                       title={game.attributes!.name}
                       slug={game.attributes!.slug}

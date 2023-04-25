@@ -62,6 +62,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const game = data.games.data[0].attributes!;
+  const gameId = data.games.data[0].id!;
 
   // get recommended games
   const { data: dataRecommended } = await apolloClient.query<QueryRecommended>({
@@ -85,6 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       cover: `http://localhost:1337${game!.cover?.data!.attributes!.src}`,
       gameInfo: {
+        id: gameId,
         title: game.name,
         price: game.price,
         description: game.short_description,
