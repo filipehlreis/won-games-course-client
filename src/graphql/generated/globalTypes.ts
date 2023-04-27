@@ -219,6 +219,12 @@ export interface StringFilterInput {
   between?: (string | null)[] | null;
 }
 
+export interface UsersPermissionsRegisterInput {
+  username: string;
+  email: string;
+  password: string;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================
