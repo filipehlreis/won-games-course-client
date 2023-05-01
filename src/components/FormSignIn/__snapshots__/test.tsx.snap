@@ -161,7 +161,7 @@ exports[`<FormSignIn /> should render the heading 1`] = `
               class="c5"
               name="email"
               placeholder="Email"
-              type="email"
+              type="name"
               value=""
             />
           </div>
@@ -205,9 +205,12 @@ exports[`<FormSignIn /> should render the heading 1`] = `
         </a>
         <button
           class="c7 c8"
+          type="submit"
         >
           <span>
-            Sign in now
+            <span>
+               Sign in now
+            </span>
           </span>
         </button>
         <div

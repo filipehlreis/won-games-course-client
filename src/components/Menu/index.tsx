@@ -14,11 +14,12 @@ import MediaMatch from 'components/MediaMatch';
 import UserDropdown from 'components/UserDropdown';
 
 export type MenuProps = {
-  username?: string;
+  username?: string | null | undefined;
 };
 
 const Menu = ({ username }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  // console.log('username', username);
 
   return (
     <S.Wrapper>

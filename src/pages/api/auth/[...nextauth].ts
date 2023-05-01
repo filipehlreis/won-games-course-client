@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-// import { AuthOptions } from 'next-auth';
+import { AuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
 // import Providers from 'next-auth/providers';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -9,7 +9,7 @@ interface GenericObject {
   [key: string]: any;
 }
 
-const options = {
+const options: AuthOptions = {
   pages: {
     signIn: '/sign-in',
   },
@@ -37,30 +37,77 @@ const options = {
 
         const data = await response.json();
 
+        // console.log('data do login', data);
+
         if (data.user) {
-          return { ...data.user, jwt: data.jwt };
+          const objeto = { ...data.user, jwt: data.jwt };
+          // console.log('objeto', objeto);
+          return objeto;
         } else {
           return null;
         }
       },
     }),
   ],
-  callbacks: {
-    session: async ({ session, user }: GenericObject) => {
-      session.jwt = user.jwt;
-      session.id = user.id;
-      return Promise.resolve(session);
-    },
-    jwt: async ({ token, user }: GenericObject) => {
-      if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.name = user.username;
-        token.jwt = user.jwt;
-      }
 
-      return Promise.resolve(token);
+  callbacks: {
+    async jwt({ token, account, user }: GenericObject) {
+      // Persist the OAuth access_token to the token right after signin
+      if (account) {
+        token.accessToken = account.access_token;
+        token.username = user.username;
+      }
+      return token;
     },
+    async session({ session, token }: GenericObject) {
+      // Send properties to the client, like an access_token from a provider.
+      session.accessToken = token.accessToken;
+      session.user.id = token.id;
+
+      session.user.name = token.username;
+
+      return session;
+    },
+
+    // callbacks: {
+    //   session: async ({ session, user }: GenericObject) => {
+    //     session.jwt = user.jwt;
+    //     session.id = user.id;
+    //     return session;
+    //     // return Promise.resolve(session);
+    //   },
+    //   jwt: async ({ token, user }: GenericObject) => {
+    //     if (user) {
+    //       token.id = user.id;
+    //       token.email = user.email;
+    //       token.name = user.username;
+    //       token.jwt = user.jwt;
+    //     }
+
+    //     return token;
+    //     // return Promise.resolve(token);
+    //   },
+    // },
+
+    // callbacks: {
+    //   async session({ session, user }: GenericObject) {
+    //     session.jwt = user.jwt;
+    //     session.id = user.id;
+    //     return session;
+    //     // return Promise.resolve(session);
+    //   },
+    //   async jwt({ token, user }: GenericObject) {
+    //     if (user) {
+    //       token.id = user.id;
+    //       token.email = user.email;
+    //       token.name = user.username;
+    //       token.jwt = user.jwt;
+    //     }
+
+    //     return token;
+    //     // return Promise.resolve(token);
+    //   },
+    // },
   },
 };
 
