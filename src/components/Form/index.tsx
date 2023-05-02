@@ -25,6 +25,19 @@ export const FormLoading = styled.img`
   width: 4rem;
 `;
 
+export const FormError = styled.div`
+  ${({ theme }) => css`
+    text-align: center;
+    color: red;
+    font-size: ${theme.font.sizes.small};
+
+    svg {
+      width: 1.6rem;
+      margin-right: 0.4rem;
+    }
+  `}
+`;
+
 export const FormLink = styled.div`
   ${({ theme }) => css`
     font-size: ${theme.font.sizes.small};
