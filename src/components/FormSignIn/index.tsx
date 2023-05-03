@@ -18,7 +18,8 @@ export const FormSignIn = () => {
   const [values, setValues] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
 
-  const { push } = useRouter();
+  const routes = useRouter();
+  const { push, query } = routes;
 
   const handleInput = (field: string, value: string) => {
     setValues((s) => ({ ...s, [field]: value }));
@@ -40,7 +41,7 @@ export const FormSignIn = () => {
     const result = await signIn('credentials', {
       ...values,
       redirect: false,
-      callbackUrl: '/',
+      callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`,
     });
     // console.log('result do signin', result);
 
