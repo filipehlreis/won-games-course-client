@@ -4,7 +4,7 @@ import NextAuth from 'next-auth/next';
 // import Providers from 'next-auth/providers';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-interface GenericObject {
+export interface GenericObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
@@ -25,7 +25,7 @@ const options: AuthOptions = {
         };
 
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/local`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`,
           {
             method: 'POST',
             body: new URLSearchParams({
@@ -56,7 +56,15 @@ const options: AuthOptions = {
       if (account) {
         token.accessToken = account.access_token;
         token.username = user.username;
+        // console.log('account.access_token do token', account.access_token);
       }
+      if (user) {
+        token.accessToken = await user.jwt;
+      }
+
+      // console.log('token do token', token);
+      // console.log('account do token', account);
+      // console.log('user do token', user);
       return token;
     },
     async session({ session, token }: GenericObject) {
@@ -66,6 +74,8 @@ const options: AuthOptions = {
 
       session.user.name = token.username;
 
+      // console.log('token do session', token);
+      // console.log('session do session', session);
       return session;
     },
 
@@ -108,6 +118,9 @@ const options: AuthOptions = {
     //     // return Promise.resolve(token);
     //   },
     // },
+  },
+  session: {
+    strategy: 'jwt',
   },
 };
 
