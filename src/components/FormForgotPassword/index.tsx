@@ -1,21 +1,19 @@
 import { useState } from 'react';
-import Link from 'next/link';
-import { Email, ErrorOutline, Lock } from '@styled-icons/material-outlined';
 
-import { FormError, FormLink, FormLoading, FormWrapper } from 'components/Form';
+import { Email, ErrorOutline } from '@styled-icons/material-outlined';
+
+import { FormError, FormLoading, FormWrapper } from 'components/Form';
 import Button from 'components/Button';
 import { TextField } from 'components/TextField';
 
-import * as S from './styles';
-
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { FieldErrors, signInValidate } from 'utils/validations';
+import { FieldErrors } from 'utils/validations';
 
-export const FormSignIn = () => {
+export const FormForgotPassword = () => {
   const [formError, setFormError] = useState('');
   const [fieldError, setFieldError] = useState<FieldErrors>({});
-  const [values, setValues] = useState({ email: '', password: '' });
+  const [values, setValues] = useState({ email: '' });
   const [loading, setLoading] = useState(false);
 
   const routes = useRouter();
@@ -29,7 +27,7 @@ export const FormSignIn = () => {
     event.preventDefault();
     setLoading(true);
 
-    const errors = signInValidate(values);
+    const errors = {}; // validate after
 
     if (Object.keys(errors).length) {
       setFieldError(errors);
@@ -73,33 +71,14 @@ export const FormSignIn = () => {
           onInputChange={(v) => handleInput('email', v)}
           icon={<Email />}
         />
-        <TextField
-          name="password"
-          placeholder="Password"
-          type="password"
-          error={fieldError?.password}
-          onInputChange={(v) => handleInput('password', v)}
-          icon={<Lock />}
-        />
-
-        <Link href="/forgot-password" passHref>
-          <S.ForgotPassword>Forgot your password?</S.ForgotPassword>
-        </Link>
 
         <Button type="submit" size="large" fullWidth disabled={loading}>
           {loading ? (
             <FormLoading src="/img/dots.svg" alt="Waiting..." />
           ) : (
-            <span> Sign in now</span>
+            <span>Send email</span>
           )}
         </Button>
-
-        <FormLink>
-          Don&apos;t have an account?{' '}
-          <Link href="/sign-up">
-            <a>Sign up</a>
-          </Link>
-        </FormLink>
       </form>
     </FormWrapper>
   );
