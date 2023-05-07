@@ -8,12 +8,12 @@ import { TextField } from 'components/TextField';
 
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { FieldErrors } from 'utils/validations';
+import { FieldErrors, resetValidate } from 'utils/validations';
 
 export const FormResetPassword = () => {
   const [formError, setFormError] = useState('');
   const [fieldError, setFieldError] = useState<FieldErrors>({});
-  const [values, setValues] = useState({ password: '', confirmPassword: '' });
+  const [values, setValues] = useState({ password: '', confirm_password: '' });
   const [loading, setLoading] = useState(false);
 
   const routes = useRouter();
@@ -27,7 +27,7 @@ export const FormResetPassword = () => {
     event.preventDefault();
     setLoading(true);
 
-    const errors = {}; // validate after
+    const errors = resetValidate(values); // validate after
 
     if (Object.keys(errors).length) {
       setFieldError(errors);

@@ -8,7 +8,7 @@ import { TextField } from 'components/TextField';
 
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { FieldErrors } from 'utils/validations';
+import { FieldErrors, forgotValidate } from 'utils/validations';
 
 export const FormForgotPassword = () => {
   const [formError, setFormError] = useState('');
@@ -27,7 +27,7 @@ export const FormForgotPassword = () => {
     event.preventDefault();
     setLoading(true);
 
-    const errors = {}; // validate after
+    const errors = forgotValidate(values);
 
     if (Object.keys(errors).length) {
       setFieldError(errors);
