@@ -17,7 +17,7 @@ export const FormResetPassword = () => {
   const [loading, setLoading] = useState(false);
 
   const routes = useRouter();
-  const { push, query } = routes;
+  const { query } = routes;
 
   const handleInput = (field: string, value: string) => {
     setValues((s) => ({ ...s, [field]: value }));
@@ -35,23 +35,44 @@ export const FormResetPassword = () => {
       return;
     }
 
-    // sign in
-    const result = await signIn('credentials', {
-      ...values,
-      redirect: false,
-      callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`,
-    });
-    // console.log('result do signin', result);
+    setFieldError({});
 
-    if (result?.url) {
-      return push(result.url);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/reset-password`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password: values.password,
+          passwordConfirmation: values.confirm_password,
+          code: query.code,
+        }),
+      },
+    );
+
+    const data = await response.json();
+
+    if (data.error) {
+      console.log('Error', data);
+      setFormError(data.error.message);
+      setLoading(false);
+    } else {
+      console.log('Sucess', data);
+      console.log('email', data.user.email);
+      signIn('credentials', {
+        email: data.user.email,
+        password: values.password,
+        callbackUrl: '/',
+      });
     }
 
-    setLoading(false);
-
-    // jogar o erro
-    setFormError('username or password is invalid');
-    console.error('email ou senha invalido');
+    // const result = await signIn('credentials', {
+    //   ...values,
+    //   redirect: false,
+    //   callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`,
+    // });
   };
 
   return (
