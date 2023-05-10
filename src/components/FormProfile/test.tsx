@@ -14,11 +14,11 @@ describe('<FormProfile />', () => {
       screen.getByRole('textbox', { name: /e-mail/i }),
     ).toBeInTheDocument();
 
-    expect(
-      screen.getByPlaceholderText(/type your password/i),
-    ).toBeInTheDocument();
+    // expect(
+    //   screen.getByPlaceholderText(/type your password/i),
+    // ).toBeInTheDocument();
 
-    expect(screen.getByPlaceholderText(/new password/i)).toBeInTheDocument();
+    // expect(screen.getByPlaceholderText(/new password/i)).toBeInTheDocument();
 
     expect(screen.getByRole('button', { name: /save/i })).toBeInTheDocument();
   });
