@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import {
   CheckCircleOutline,
@@ -28,8 +28,9 @@ export const FormForgotPassword = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleInput = (field: string, value: string) => {
-    setValues((s) => ({ ...s, [field]: value }));
+  // const handleInput = (field: string, value: string) => {
+  const handleInput = (field: string, value: ChangeEvent<HTMLInputElement>) => {
+    setValues((s) => ({ ...s, [field]: value.target.value as string }));
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -95,7 +96,8 @@ export const FormForgotPassword = () => {
               type="name"
               error={fieldError?.email}
               initialValue={query.email as string}
-              onInputChange={(v) => handleInput('email', v)}
+              onChange={(v) => handleInput('email', v)}
+              // onInputChange={(v) => handleInput('email', v)}
               icon={<Email />}
             />
 

@@ -24,7 +24,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "./.jest/setup.ts"
+    ".jest/setup.ts"
   ],
   "exclude": [
     "node_modules",

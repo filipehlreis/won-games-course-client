@@ -6,3 +6,11 @@ import dotenv from 'dotenv';
 dotenv.config({
   path: '.env.development'
 })
+
+// require('dotenv').config({
+//   path: './.env',
+// });
+
+// require('dotenv').config({
+//   path: './.env.development',
+// });
