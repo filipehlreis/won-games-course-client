@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { Lock, ErrorOutline } from '@styled-icons/material-outlined';
 
@@ -19,8 +19,8 @@ export const FormResetPassword = () => {
   const routes = useRouter();
   const { query } = routes;
 
-  const handleInput = (field: string, value: string) => {
-    setValues((s) => ({ ...s, [field]: value }));
+  const handleInput = (field: string, value: ChangeEvent<HTMLInputElement>) => {
+    setValues((s) => ({ ...s, [field]: value.target.value as string }));
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -55,12 +55,12 @@ export const FormResetPassword = () => {
     const data = await response.json();
 
     if (data.error) {
-      console.log('Error', data);
+      // console.log('Error', data);
       setFormError(data.error.message);
       setLoading(false);
     } else {
-      console.log('Sucess', data);
-      console.log('email', data.user.email);
+      // console.log('Sucess', data);
+      // console.log('email', data.user.email);
       signIn('credentials', {
         email: data.user.email,
         password: values.password,
@@ -89,7 +89,7 @@ export const FormResetPassword = () => {
           placeholder="Password"
           type="password"
           error={fieldError?.password}
-          onInputChange={(v) => handleInput('password', v)}
+          onChange={(v) => handleInput('password', v)}
           icon={<Lock />}
         />
         <TextField
@@ -97,7 +97,7 @@ export const FormResetPassword = () => {
           placeholder="Confirm password"
           type="password"
           error={fieldError?.confirm_password}
-          onInputChange={(v) => handleInput('confirm_password', v)}
+          onChange={(v) => handleInput('confirm_password', v)}
           icon={<Lock />}
         />
 
