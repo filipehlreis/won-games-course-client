@@ -46,3 +46,127 @@ const FormProfile = ({ username, email }: FormProfileProps) => {
 };
 
 export default FormProfile;
+
+/*
+
+# Write your query or mutation here
+mutation login($input: UsersPermissionsLoginInput!) {
+  login(input: $input) {
+    jwt
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+
+
+
+mutation MutationCreateWishlist($input: WishlistInput!) {
+  createWishlist(data: $input) {
+    data {
+      id
+      attributes {
+        user {
+          data {
+            id
+            attributes {
+              username
+            }
+          }
+        }
+        games {
+          data {
+            id
+            attributes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+{
+	"input": {
+    "games": [227, 115],
+    "user": 11
+  }
+}
+
+
+{
+  "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTY4NDQ1NjM5NSwiZXhwIjoxNjg3MDQ4Mzk1fQ.F0fvrO_je_2XI4miimRHs3O2ipv7WrUXo3zCdnic048"
+}
+
+
+
+mutation MutationUpdateWishlist($id: ID!, $data: WishlistInput!) {
+  updateWishlist(id: $id, data: $data) {
+    data {
+      id
+      attributes {
+        games {
+          data {
+            id
+            attributes {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+}
+{
+"id": 33,
+  "data": {
+    "games": [76, 168, 157],
+    "user": 11
+  }
+}
+
+
+
+
+
+
+
+
+query QueryWishlist($identifier: String!) {
+  wishlists(filters: { user: { email: { eq: $identifier } } }) {
+    data {
+      id
+      attributes {
+        games {
+          data {
+            id
+            attributes {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+{
+  "identifier": "filipe@gmail.com"
+}
+
+
+
+
+
+
+
+
+
+
+*/

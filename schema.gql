@@ -999,7 +999,44 @@ type RecommendedEntityResponse {
   data: RecommendedEntity
 }
 
-union GenericMorph = ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection | UploadFile | UploadFolder | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Banner | Category | Developer | Game | Home | Platform | Publisher | Recommended
+input WishlistFiltersInput {
+  id: IDFilterInput
+  games: GameFiltersInput
+  user: UsersPermissionsUserFiltersInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [WishlistFiltersInput]
+  or: [WishlistFiltersInput]
+  not: WishlistFiltersInput
+}
+
+input WishlistInput {
+  games: [ID]
+  user: ID
+}
+
+type Wishlist {
+  games(filters: GameFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): GameRelationResponseCollection
+  user: UsersPermissionsUserEntityResponse
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type WishlistEntity {
+  id: ID
+  attributes: Wishlist
+}
+
+type WishlistEntityResponse {
+  data: WishlistEntity
+}
+
+type WishlistEntityResponseCollection {
+  data: [WishlistEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
+union GenericMorph = ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection | UploadFile | UploadFolder | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Banner | Category | Developer | Game | Home | Platform | Publisher | Recommended | Wishlist
 
 input FileInfoInput {
   name: String
@@ -1088,6 +1125,8 @@ type Query {
   publisher(id: ID): PublisherEntityResponse
   publishers(filters: PublisherFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PublisherEntityResponseCollection
   recommended: RecommendedEntityResponse
+  wishlist(id: ID): WishlistEntityResponse
+  wishlists(filters: WishlistFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): WishlistEntityResponseCollection
   me: UsersPermissionsMe
 }
 
@@ -1120,6 +1159,9 @@ type Mutation {
   deletePublisher(id: ID!): PublisherEntityResponse
   updateRecommended(data: RecommendedInput!): RecommendedEntityResponse
   deleteRecommended: RecommendedEntityResponse
+  createWishlist(data: WishlistInput!): WishlistEntityResponse
+  updateWishlist(id: ID!, data: WishlistInput!): WishlistEntityResponse
+  deleteWishlist(id: ID!): WishlistEntityResponse
   upload(refId: ID, ref: String, field: String, info: FileInfoInput, file: Upload!): UploadFileEntityResponse!
   multipleUpload(refId: ID, ref: String, field: String, files: [Upload]!): [UploadFileEntityResponse]!
   updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
