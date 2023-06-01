@@ -8,6 +8,7 @@ import {
   QueryHome_sections_data_attributes_freeGames_highlight,
   QueryHome_sections_data_attributes_popularGames_games,
 } from '../../graphql/generated/QueryHome';
+import { QueryWishlist_wishlists_data_attributes_games } from 'graphql/generated/QueryWishlist';
 
 export const bannerMapper = (banners: QueryHome_banners) => {
   return banners!.data.map((banner) => ({
@@ -29,13 +30,18 @@ export const bannerMapper = (banners: QueryHome_banners) => {
 export const gamesMapper = (
   games:
     | QueryGames_games
+    | QueryWishlist_wishlists_data_attributes_games
     | QueryHome_sections_data_attributes_popularGames_games
     | null
     | undefined,
 ) => {
+  console.info(
+    'dentro do gameMapper games >>>>>>',
+    JSON.stringify(games, null, 2),
+  );
   return games
-    ? games.data.map((game) => ({
-        id: game.id,
+    ? games.data?.map((game) => ({
+        id: game.id!,
         title: game.attributes!.name,
         slug: game.attributes!.slug,
         developer: game.attributes!.developers!.data[0].attributes!.name,

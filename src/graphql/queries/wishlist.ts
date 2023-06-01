@@ -1,5 +1,5 @@
 import { QueryHookOptions, gql, useQuery } from '@apollo/client';
-import { GameFragment } from 'graphql/fragments/game';
+import { GameFragmentRelation } from 'graphql/fragments/game';
 import {
   QueryWishlist,
   QueryWishlistVariables,
@@ -12,13 +12,13 @@ export const QUERY_WISHLIST = gql`
         id
         attributes {
           games {
-            ...GameFragment
+            ...GameFragmentRelation
           }
         }
       }
     }
   }
-  ${GameFragment}
+  ${GameFragmentRelation}
 `;
 
 export function useQueryWishlist(

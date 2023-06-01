@@ -18,10 +18,9 @@ function createApolloClient(session?: GenericObject | null) {
 
   // console.log('session do apollo', session);
 
-  const authLink = setContext((_, { headers }) => {
-    const authorization = session?.accessToken
-      ? `Bearer ${session?.accessToken}`
-      : '';
+  const authLink = setContext((_, { headers, session: clientSession }) => {
+    const jwt = session?.accessToken || clientSession?.jwt || '';
+    const authorization = jwt ? `Bearer ${jwt}` : '';
     return { headers: { ...headers, authorization } };
   });
 
