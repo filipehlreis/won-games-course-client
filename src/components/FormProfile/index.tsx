@@ -61,6 +61,13 @@ mutation login($input: UsersPermissionsLoginInput!) {
   }
 }
 
+{
+  "input": {
+    "identifier": "filipe3@gmail.com",
+    "password": "Strapi123",
+    "provider": "local"
+  }
+}
 
 
 mutation MutationCreateWishlist($input: WishlistInput!) {

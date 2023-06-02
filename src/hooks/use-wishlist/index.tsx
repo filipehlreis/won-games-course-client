@@ -1,8 +1,13 @@
+import { useMutation } from '@apollo/client';
 import { GameCardProps } from 'components/GameCard';
 import { QueryWishlist_wishlists_data_attributes_games } from 'graphql/generated/QueryWishlist';
+import {
+  MUTATION_CREATE_WISHLIST,
+  MUTATION_UPDATE_WISHLIST,
+} from 'graphql/mutations/wishlist';
 import { useQueryWishlist } from 'graphql/queries/wishlist';
 import { useSession } from 'next-auth/react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { gamesMapper } from 'utils/mappers';
 
 export type WishlistContextData = {
@@ -31,6 +36,7 @@ export type WishlistProviderProps = {
 
 const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const { data: session, status } = useSession();
+  const [wishlistId, setWishlistId] = useState<string | null>();
   console.log('session', session);
   console.log('status', status);
 
@@ -39,6 +45,27 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
       __typename: 'GameRelationResponseCollection',
       data: [],
     });
+
+  const [createList /*, { loading: loadingCreate }*/] = useMutation(
+    MUTATION_CREATE_WISHLIST,
+    {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.createWishlist?.data?.attributes?.games || []);
+        setWishlistId(data?.createWishlist?.data?.id);
+      },
+    },
+  );
+
+  const [updateList /*, { loading: loadingUpdate }*/] = useMutation(
+    MUTATION_UPDATE_WISHLIST,
+    {
+      context: { session },
+      onCompleted: (data) => {
+        setWishlistItems(data?.updateWishlist?.data?.attributes?.games || []);
+      },
+    },
+  );
 
   const { data, loading } = useQueryWishlist({
     skip: !session?.user?.email,
@@ -76,13 +103,45 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     //   'dentro do useeffect info para o wishlistItems >>>>>>',
     //   JSON.stringify(wishlistItems, null, 2),
     // );
+    setWishlistId(data?.wishlists?.data[0]?.id);
   }, [data]);
+
+  const wishlistIds = useMemo(
+    () => wishlistItems.data.map((game) => game.id),
+    [wishlistItems],
+  );
 
   const isInWishlist = (id: string) =>
     !!wishlistItems.data.find((game) => game.id === id);
-  const addToWishlist = (/*id: string*/) => {
-    //
+
+  const addToWishlist = (id: string) => {
+    // se nao existir wishlist -> cria
+    console.log(
+      'wishlistIds>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+      wishlistIds,
+    );
+    if (!wishlistId) {
+      return createList({
+        variables: {
+          input: {
+            games: [...wishlistIds, id],
+            user: 1,
+          },
+        },
+      });
+    }
+    // senao, atualiza a wishlist existente
+    return updateList({
+      variables: {
+        id: wishlistId,
+        data: {
+          games: [...wishlistIds, id],
+          user: 1,
+        },
+      },
+    });
   };
+
   const removeFromWishlist = (/*id: string*/) => {
     //
   };
