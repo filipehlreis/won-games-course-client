@@ -113,6 +113,34 @@ export const updateWishlistMock = {
   },
 };
 
+export const removeWishlistMock = {
+  request: {
+    query: MUTATION_UPDATE_WISHLIST,
+    context: { session: { jwt: '123' } },
+    variables: {
+      id: 1,
+      data: {
+        games: ['2'],
+        user: 1,
+      },
+    },
+  },
+  result: {
+    data: {
+      updateWishlist: {
+        data: {
+          id: '1',
+          attributes: {
+            games: {
+              data: [gameMock('2')],
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
 export const wishlistItems = [
   {
     id: '1',

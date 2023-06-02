@@ -46,7 +46,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
       data: [],
     });
 
-  const [createList /*, { loading: loadingCreate }*/] = useMutation(
+  const [createList, { loading: loadingCreate }] = useMutation(
     MUTATION_CREATE_WISHLIST,
     {
       context: { session },
@@ -57,7 +57,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     },
   );
 
-  const [updateList /*, { loading: loadingUpdate }*/] = useMutation(
+  const [updateList, { loading: loadingUpdate }] = useMutation(
     MUTATION_UPDATE_WISHLIST,
     {
       context: { session },
@@ -67,7 +67,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     },
   );
 
-  const { data, loading } = useQueryWishlist({
+  const { data, loading: loadingQuery } = useQueryWishlist({
     skip: !session?.user?.email,
     context: { session },
     variables: {
@@ -79,7 +79,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     JSON.stringify(data, null, 2),
   );
 
-  console.log('loading', loading);
+  // console.log('loading', loading);
   useEffect(() => {
     const gameObject: QueryWishlist_wishlists_data_attributes_games = {
       __typename: 'GameRelationResponseCollection',
@@ -142,8 +142,17 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     });
   };
 
-  const removeFromWishlist = (/*id: string*/) => {
+  const removeFromWishlist = (id: string) => {
     //
+    updateList({
+      variables: {
+        id: wishlistId,
+        data: {
+          games: wishlistIds.filter((gameId) => gameId !== id),
+          user: 1,
+        },
+      },
+    });
   };
 
   return (
@@ -153,7 +162,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
         isInWishlist,
         addToWishlist,
         removeFromWishlist,
-        loading,
+        loading: loadingQuery || loadingCreate || loadingUpdate,
       }}
     >
       {children}
