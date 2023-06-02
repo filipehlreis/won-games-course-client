@@ -40,14 +40,6 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
       data: [],
     });
 
-  const isInWishlist = (/*id: string*/) => false;
-  const addToWishlist = (/*id: string*/) => {
-    //
-  };
-  const removeFromWishlist = (/*id: string*/) => {
-    //
-  };
-
   const { data, loading } = useQueryWishlist({
     skip: !session?.user?.email,
     context: { session },
@@ -85,6 +77,15 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     //   JSON.stringify(wishlistItems, null, 2),
     // );
   }, [data]);
+
+  const isInWishlist = (id: string) =>
+    !!wishlistItems.data.find((game) => game.id === id);
+  const addToWishlist = (/*id: string*/) => {
+    //
+  };
+  const removeFromWishlist = (/*id: string*/) => {
+    //
+  };
 
   return (
     <WishlistContext.Provider
