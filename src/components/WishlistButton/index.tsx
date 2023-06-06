@@ -14,7 +14,11 @@ const WishlistButton = ({
   size = 'small',
 }: WIshlistButtonProps) => {
   const { data: session } = useSession();
-  const { isInWishlist } = useWishlist();
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
+
+  const handleClick = () => {
+    isInWishlist(id) ? removeFromWishlist(id) : addToWishlist(id);
+  };
 
   const ButtonText = isInWishlist(id)
     ? 'Remove from Wishlist'
@@ -31,6 +35,7 @@ const WishlistButton = ({
           <FavoriteBorder aria-label={ButtonText} />
         )
       }
+      onClick={handleClick}
       minimal
       size={size}
     >
