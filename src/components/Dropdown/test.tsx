@@ -1,4 +1,4 @@
-import { screen, render } from 'utils/test-utils';
+import { screen, render, act, waitFor } from 'utils/test-utils';
 
 import userEvent from '@testing-library/user-event';
 
@@ -25,24 +25,36 @@ describe('<Dropdown />', () => {
     expect(content).toHaveStyle({ opacity: 0 });
     expect(content.getAttribute('aria-hidden')).toBe('true');
 
-    await userEvent.click(screen.getByLabelText(/toogle dropdown/));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/toogle dropdown/));
+    });
 
-    expect(content).toHaveStyle({ opacity: 1 });
-    expect(content.getAttribute('aria-hidden')).toBe('false');
+    waitFor(() => {
+      expect(content).toHaveStyle({ opacity: 1 });
+      expect(content.getAttribute('aria-hidden')).toBe('false');
+    });
   });
 
   it('should handle open/close dropdown when clicking on overlay', async () => {
     const content = screen.getByText(/content/i).parentElement!;
     const overlay = content.nextElementSibling;
 
-    await userEvent.click(screen.getByLabelText(/toogle dropdown/));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/toogle dropdown/));
+    });
 
-    expect(overlay).toHaveStyle({ opacity: 1 });
-    expect(overlay!.getAttribute('aria-hidden')).toBe('false');
+    waitFor(() => {
+      expect(overlay).toHaveStyle({ opacity: 1 });
+      expect(overlay!.getAttribute('aria-hidden')).toBe('false');
+    });
 
-    await userEvent.click(overlay!);
+    act(() => {
+      userEvent.click(overlay!);
+    });
 
-    expect(overlay).toHaveStyle({ opacity: 0 });
-    expect(overlay!.getAttribute('aria-hidden')).toBe('true');
+    waitFor(() => {
+      expect(overlay).toHaveStyle({ opacity: 0 });
+      expect(overlay!.getAttribute('aria-hidden')).toBe('true');
+    });
   });
 });

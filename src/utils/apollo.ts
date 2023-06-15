@@ -18,11 +18,23 @@ function createApolloClient(session?: GenericObject | null) {
 
   // console.log('session do apollo', session);
 
-  const authLink = setContext((_, { headers, session: clientSession }) => {
-    const jwt = session?.accessToken || clientSession?.jwt || '';
-    const authorization = jwt ? `Bearer ${jwt}` : '';
-    return { headers: { ...headers, authorization } };
-  });
+  const authLink = setContext(
+    async (_, { headers, session: clientSession }) => {
+      console.log('client do apollo', clientSession);
+      const jwt =
+        (await session?.accessToken) ||
+        (await clientSession?.accessToken) ||
+        (await clientSession?.jwt) ||
+        '';
+      const authorization = jwt ? `Bearer ${jwt}` : '';
+      console.log('jwt', jwt);
+      console.log('acesstokwn', session?.accessToken);
+      console.log('session', session);
+
+      console.log('authorization >>>>> ', authorization);
+      return { headers: { ...headers, authorization } };
+    },
+  );
 
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
@@ -88,6 +100,7 @@ export function initializeApollo(initialState = {}, session?: Session | null) {
     apolloClientGlobal.cache.restore(initialState);
   }
 
+  console.log('session da inicializacao >>>>>', session);
   // sempre inicializando no SSR com cache limpo
   if (typeof window === 'undefined') return apolloClientGlobal;
 
@@ -101,5 +114,7 @@ export function useApollo(initialState = {}, session?: Session) {
     () => initializeApollo(initialState, session),
     [initialState, session],
   );
+
+  console.log('session da useapollo >>>>>', session);
   return store;
 }

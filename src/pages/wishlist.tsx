@@ -15,7 +15,7 @@ export default function WishlistPage(props: WishlistTemplateProps) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await protectedRoutes(context);
-
+  console.log('session do wishlit', session);
   const apolloClient = initializeApollo();
 
   const { data } = await apolloClient.query<QueryRecommended>({

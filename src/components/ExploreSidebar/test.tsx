@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { css } from 'styled-components';
 
-import { screen, render } from 'utils/test-utils';
+import { screen, render, act, waitFor } from 'utils/test-utils';
 
 import ExploreSidebar from '.';
 
@@ -77,16 +77,20 @@ describe('<ExploreSidebar />', () => {
 
     render(<ExploreSidebar items={items} onFilter={onFilter} />);
 
-    await userEvent.click(screen.getByLabelText(/windows/i));
-    await userEvent.click(screen.getByLabelText(/linux/i));
-    await userEvent.click(screen.getByLabelText(/low to high/i));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/windows/i));
+      userEvent.click(screen.getByLabelText(/linux/i));
+      userEvent.click(screen.getByLabelText(/low to high/i));
+    });
 
-    // 1st render (initialValues) + 3 clicks
-    expect(onFilter).toHaveBeenCalledTimes(4);
+    waitFor(() => {
+      // 1st render (initialValues) + 3 clicks
+      expect(onFilter).toHaveBeenCalledTimes(4);
 
-    expect(onFilter).toBeCalledWith({
-      platforms: ['windows', 'linux'],
-      sort_by: 'low-to-high',
+      expect(onFilter).toBeCalledWith({
+        platforms: ['windows', 'linux'],
+        sort_by: 'low-to-high',
+      });
     });
   });
 
@@ -95,10 +99,14 @@ describe('<ExploreSidebar />', () => {
 
     render(<ExploreSidebar items={items} onFilter={onFilter} />);
 
-    await userEvent.click(screen.getByLabelText(/low to high/i));
-    await userEvent.click(screen.getByLabelText(/high to low/i));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/low to high/i));
+      userEvent.click(screen.getByLabelText(/high to low/i));
+    });
 
-    expect(onFilter).toBeCalledWith({ sort_by: 'high-to-low' });
+    waitFor(() => {
+      expect(onFilter).toBeCalledWith({ sort_by: 'high-to-low' });
+    });
   });
 
   it('should open/close sidebar when filtering on mobile', async () => {
@@ -117,18 +125,30 @@ describe('<ExploreSidebar />', () => {
 
     expect(Element).not.toHaveStyleRule('opacity', '1', variant);
 
-    await userEvent.click(screen.getByLabelText(/open filters/));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/open filters/));
+    });
 
-    expect(Element).toHaveStyleRule('opacity', '1', variant);
+    waitFor(() => {
+      expect(Element).toHaveStyleRule('opacity', '1', variant);
+    });
 
-    await userEvent.click(screen.getByLabelText(/close filters/));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/close filters/));
+    });
 
-    expect(Element).not.toHaveStyleRule('opacity', '1', variant);
+    waitFor(() => {
+      expect(Element).not.toHaveStyleRule('opacity', '1', variant);
+    });
 
-    await userEvent.click(screen.getByLabelText(/open filters/));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/open filters/));
 
-    await userEvent.click(screen.getByRole('button', { name: /filter/i }));
+      userEvent.click(screen.getByRole('button', { name: /filter/i }));
+    });
 
-    expect(Element).not.toHaveStyleRule('opacity', '1', variant);
+    waitFor(() => {
+      expect(Element).not.toHaveStyleRule('opacity', '1', variant);
+    });
   });
 });

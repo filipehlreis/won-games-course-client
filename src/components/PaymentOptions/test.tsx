@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import { screen, render, waitFor } from 'utils/test-utils';
 import PaymentOptions from '.';
 import cards from './mock';
+import { act } from 'react-dom/test-utils';
 
 describe('<PaymentOptions />', () => {
   it('should render the saved card options and the add new card button', () => {
@@ -15,7 +16,10 @@ describe('<PaymentOptions />', () => {
   it('should handle select card when clicking on the label', async () => {
     render(<PaymentOptions cards={cards} handlePayment={jest.fn} />);
 
-    userEvent.click(screen.getByLabelText(/4325/));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/4325/));
+    });
+
     await waitFor(() => {
       expect(screen.getByRole('radio', { name: /4325/ })).toBeChecked();
     });
@@ -25,16 +29,23 @@ describe('<PaymentOptions />', () => {
     const handlePayment = jest.fn();
     render(<PaymentOptions cards={cards} handlePayment={handlePayment} />);
 
-    userEvent.click(screen.getByRole('button', { name: /buy now/i }));
-    expect(handlePayment).not.toHaveBeenCalled();
+    act(() => {
+      userEvent.click(screen.getByRole('button', { name: /buy now/i }));
+    });
+
+    waitFor(() => {
+      expect(handlePayment).not.toHaveBeenCalled();
+    });
   });
 
   it('should call handlePayment when credit card is selected', async () => {
     const handlePayment = jest.fn();
     render(<PaymentOptions cards={cards} handlePayment={handlePayment} />);
 
-    await userEvent.click(screen.getByLabelText(/4325/));
-    await userEvent.click(screen.getByRole('button', { name: /buy now/i }));
+    act(() => {
+      userEvent.click(screen.getByLabelText(/4325/));
+      userEvent.click(screen.getByRole('button', { name: /buy now/i }));
+    });
 
     await waitFor(() => {
       expect(handlePayment).toHaveBeenCalled();

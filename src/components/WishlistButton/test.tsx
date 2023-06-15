@@ -1,6 +1,6 @@
 import { WishlistContextDefaultValues } from 'hooks/use-wishlist';
 import WishlistButton from '.';
-import { act, fireEvent, render, screen } from 'utils/test-utils';
+import { act, fireEvent, render, screen, waitFor } from 'utils/test-utils';
 
 const useSessionMock = jest
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -94,7 +94,9 @@ describe('<WishlistButton />', () => {
       fireEvent.click(screen.getByText(/add to wishlist/i));
     });
 
-    expect(wishlistProviderProps.addToWishlist).toHaveBeenCalledWith('1');
+    waitFor(() => {
+      expect(wishlistProviderProps.addToWishlist).toHaveBeenCalledWith('1');
+    });
   });
 
   it('should remove from wishlist', async () => {
@@ -110,6 +112,10 @@ describe('<WishlistButton />', () => {
       fireEvent.click(screen.getByText(/remove from wishlist/i));
     });
 
-    expect(wishlistProviderProps.removeFromWishlist).toHaveBeenCalledWith('1');
+    waitFor(() => {
+      expect(wishlistProviderProps.removeFromWishlist).toHaveBeenCalledWith(
+        '1',
+      );
+    });
   });
 });

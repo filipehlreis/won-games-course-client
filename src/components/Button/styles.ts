@@ -67,6 +67,10 @@ export const Wrapper = styled.button<WrapperProps>`
     padding: ${theme.spacings.xxsmall};
     text-decoration: none;
 
+    &:focus {
+      outline: 1px dashed;
+    }
+
     &:hover {
       background: linear-gradient(180deg, #e35565 0%, #d958a6 50%)};
     }

@@ -1,3 +1,5 @@
+import 'session.mock';
+
 import 'match-media-mock';
 import { screen, render } from 'utils/test-utils';
 import Wishlist from '.';

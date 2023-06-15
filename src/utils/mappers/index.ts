@@ -35,10 +35,10 @@ export const gamesMapper = (
     | null
     | undefined,
 ) => {
-  console.info(
-    'dentro do gameMapper games >>>>>>',
-    JSON.stringify(games, null, 2),
-  );
+  // console.info(
+  //   'dentro do gameMapper games >>>>>>',
+  //   JSON.stringify(games, null, 2),
+  // );
   return games
     ? games.data?.map((game) => ({
         id: game.id!,

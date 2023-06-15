@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-import { GameFragment } from 'graphql/fragments/game';
+import { GameFragmentRelation } from 'graphql/fragments/game';
 
 export const MUTATION_CREATE_WISHLIST = gql`
   mutation MutationCreateWishlist($input: WishlistInput!) {
@@ -16,13 +16,13 @@ export const MUTATION_CREATE_WISHLIST = gql`
             }
           }
           games {
-            ...GameFragment
+            ...GameFragmentRelation
           }
         }
       }
     }
   }
-  ${GameFragment}
+  ${GameFragmentRelation}
 `;
 
 export const MUTATION_UPDATE_WISHLIST = gql`
@@ -32,11 +32,11 @@ export const MUTATION_UPDATE_WISHLIST = gql`
         id
         attributes {
           games {
-            ...GameFragment
+            ...GameFragmentRelation
           }
         }
       }
     }
   }
-  ${GameFragment}
+  ${GameFragmentRelation}
 `;
