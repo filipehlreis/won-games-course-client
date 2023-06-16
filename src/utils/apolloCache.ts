@@ -10,5 +10,12 @@ export default new InMemoryCache({
         },
       },
     },
+    Wishlist: {
+      fields: {
+        games: {
+          merge: true,
+        },
+      },
+    },
   },
 });
