@@ -21,6 +21,7 @@ const Base = ({ children }: BaseTemplateProps) => {
   // }, [session, status]);
 
   // console.log('session da base', session);
+  console.log('<>><><><><><><session da base<>><><>????????', session);
 
   return (
     <S.Wrapper>
