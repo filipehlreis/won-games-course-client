@@ -22,6 +22,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await protectedRoutes(context);
   console.log('session do wishlit', session);
   // const apolloClient = initializeApollo({}, session);
+
+  // necessario corrigir o initializeApollo
   const apolloClient = initializeApollo();
 
   if (!session) return {};
