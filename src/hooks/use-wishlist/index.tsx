@@ -38,7 +38,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const { data: session, status } = useSession();
   const [wishlistId, setWishlistId] = useState<string | null>();
   // console.log('session', session);
-  console.log('status', status);
+  // console.log('status', status);
 
   const [wishlistItems, setWishlistItems] =
     useState<QueryWishlist_wishlists_data_attributes_games>({
@@ -105,10 +105,10 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     //   JSON.stringify(wishlistItems, null, 2),
     // );
     setWishlistId(data?.wishlists?.data[0]?.id);
-    console.log('status', status);
-    console.log('session', session);
-    console.log('wishlistItems', wishlistItems);
-    console.log('wishlistId', wishlistId);
+    // console.log('status', status);
+    // console.log('session', session);
+    // console.log('wishlistItems', wishlistItems);
+    // console.log('wishlistId', wishlistId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, status, session, wishlistId]);
 
@@ -122,15 +122,15 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
 
   const addToWishlist = (id: string) => {
     // se nao existir wishlist -> cria
-    console.log(
-      'wishlistIds>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
-      wishlistIds,
-    );
-    console.log('session', session);
-    console.log('id >>>>>>', id, 'tipo de id', typeof id);
+    // console.log(
+    //   'wishlistIds>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
+    //   wishlistIds,
+    // );
+    // console.log('session', session);
+    // console.log('id >>>>>>', id, 'tipo de id', typeof id);
     if (!wishlistId) {
       const gamesToAdd = [...wishlistIds, id];
-      console.log('gamesToAdd', gamesToAdd);
+      // console.log('gamesToAdd', gamesToAdd);
       return createList({
         variables: {
           input: {

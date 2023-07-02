@@ -1,30 +1,40 @@
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
 import Base from 'templates/Base';
 import { Container } from 'components/Container';
 import { Divider } from 'components/Divider';
 import Heading from 'components/Heading';
 import { GameCardProps } from 'components/GameCard';
 import { HighlightProps } from 'components/Highlight';
-import PaymentOptions, { PaymentOptionsProp } from 'components/PaymentOptions';
+import PaymentForm from 'components/PaymentForm';
 import CartList, { CartListProps } from 'components/CartList';
 import Showcase from 'components/Showcase';
 
 import * as S from './styles';
 import { Info } from '@styled-icons/material-outlined';
+// import { Session } from 'next-auth';
+import { GenericObject } from 'pages/api/auth/[...nextauth]';
 
 export type CartProps = {
+  session: GenericObject;
+  accessToken: string;
   recommendedTitle: string;
   recommendedGames: GameCardProps[];
   recommendedHighlight: HighlightProps;
-} & CartListProps &
-  Pick<PaymentOptionsProp, 'cards'>;
+} & CartListProps;
+
+const stripe = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`);
 
 const Cart = ({
+  // session,
+  accessToken,
   recommendedTitle,
   recommendedGames,
   recommendedHighlight,
-  cards,
 }: CartProps) => {
-  const handlePayment = () => ({});
+  // console.log('++++++++++++++++++session do cart', session);
+  // console.log('++++++++++++++++++accessToken do cart', accessToken);
 
   return (
     <Base>
@@ -35,7 +45,9 @@ const Cart = ({
 
         <S.Content>
           <CartList />
-          <PaymentOptions cards={cards} handlePayment={handlePayment} />
+          <Elements stripe={stripe}>
+            <PaymentForm accessToken={accessToken} />
+          </Elements>
         </S.Content>
 
         <S.Text>

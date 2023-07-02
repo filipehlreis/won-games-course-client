@@ -36,6 +36,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.5",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.1",
     "@styled-icons/boxicons-regular": "^10.47.0",
     "@styled-icons/boxicons-solid": "^10.47.0",
     "@styled-icons/fa-brands": "^10.47.0",
