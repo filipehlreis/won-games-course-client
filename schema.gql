@@ -36,6 +36,9 @@ scalar DateTime
 """A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
 scalar Date
 
+"""The `BigInt` scalar type represents non-fractional signed whole numeric values."""
+scalar Long
+
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
 
@@ -149,6 +152,30 @@ input IntFilterInput {
   in: [Int]
   notIn: [Int]
   between: [Int]
+}
+
+input LongFilterInput {
+  and: [Long]
+  or: [Long]
+  not: LongFilterInput
+  eq: Long
+  eqi: Long
+  ne: Long
+  startsWith: Long
+  endsWith: Long
+  contains: Long
+  notContains: Long
+  containsi: Long
+  notContainsi: Long
+  gt: Long
+  gte: Long
+  lt: Long
+  lte: Long
+  null: Boolean
+  notNull: Boolean
+  in: [Long]
+  notIn: [Long]
+  between: [Long]
 }
 
 input FloatFilterInput {
@@ -652,6 +679,61 @@ type UsersPermissionsUserRelationResponseCollection {
   data: [UsersPermissionsUserEntity!]!
 }
 
+input EmailDesignerEmailTemplateFiltersInput {
+  id: IDFilterInput
+  templateReferenceId: IntFilterInput
+  design: JSONFilterInput
+  name: StringFilterInput
+  subject: StringFilterInput
+  bodyHtml: StringFilterInput
+  bodyText: StringFilterInput
+  enabled: BooleanFilterInput
+  tags: JSONFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [EmailDesignerEmailTemplateFiltersInput]
+  or: [EmailDesignerEmailTemplateFiltersInput]
+  not: EmailDesignerEmailTemplateFiltersInput
+}
+
+input EmailDesignerEmailTemplateInput {
+  templateReferenceId: Int
+  design: JSON
+  name: String
+  subject: String
+  bodyHtml: String
+  bodyText: String
+  enabled: Boolean
+  tags: JSON
+}
+
+type EmailDesignerEmailTemplate {
+  templateReferenceId: Int
+  design: JSON
+  name: String
+  subject: String
+  bodyHtml: String
+  bodyText: String
+  enabled: Boolean
+  tags: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type EmailDesignerEmailTemplateEntity {
+  id: ID
+  attributes: EmailDesignerEmailTemplate
+}
+
+type EmailDesignerEmailTemplateEntityResponse {
+  data: EmailDesignerEmailTemplateEntity
+}
+
+type EmailDesignerEmailTemplateEntityResponseCollection {
+  data: [EmailDesignerEmailTemplateEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
 input BannerFiltersInput {
   id: IDFilterInput
   title: StringFilterInput
@@ -896,6 +978,55 @@ type HomeEntityResponse {
   data: HomeEntity
 }
 
+input OrderFiltersInput {
+  id: IDFilterInput
+  user: UsersPermissionsUserFiltersInput
+  games: GameFiltersInput
+  total_in_cents: LongFilterInput
+  payment_intent_id: StringFilterInput
+  card_brand: StringFilterInput
+  card_last4: StringFilterInput
+  createdAt: DateTimeFilterInput
+  updatedAt: DateTimeFilterInput
+  and: [OrderFiltersInput]
+  or: [OrderFiltersInput]
+  not: OrderFiltersInput
+}
+
+input OrderInput {
+  user: ID
+  games: [ID]
+  total_in_cents: Long
+  payment_intent_id: String
+  card_brand: String
+  card_last4: String
+}
+
+type Order {
+  user: UsersPermissionsUserEntityResponse
+  games(filters: GameFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): GameRelationResponseCollection
+  total_in_cents: Long!
+  payment_intent_id: String
+  card_brand: String
+  card_last4: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type OrderEntity {
+  id: ID
+  attributes: Order
+}
+
+type OrderEntityResponse {
+  data: OrderEntity
+}
+
+type OrderEntityResponseCollection {
+  data: [OrderEntity!]!
+  meta: ResponseCollectionMeta!
+}
+
 input PlatformFiltersInput {
   id: IDFilterInput
   name: StringFilterInput
@@ -1036,7 +1167,7 @@ type WishlistEntityResponseCollection {
   meta: ResponseCollectionMeta!
 }
 
-union GenericMorph = ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection | UploadFile | UploadFolder | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | Banner | Category | Developer | Game | Home | Platform | Publisher | Recommended | Wishlist
+union GenericMorph = ComponentPageButton | ComponentPageHighlight | ComponentPagePopularGames | ComponentPageRibbon | ComponentPageSection | UploadFile | UploadFolder | I18NLocale | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser | EmailDesignerEmailTemplate | Banner | Category | Developer | Game | Home | Order | Platform | Publisher | Recommended | Wishlist
 
 input FileInfoInput {
   name: String
@@ -1111,6 +1242,8 @@ type Query {
   usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
   usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
   usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserEntityResponseCollection
+  emailDesignerEmailTemplate(id: ID): EmailDesignerEmailTemplateEntityResponse
+  emailDesignerEmailTemplates(filters: EmailDesignerEmailTemplateFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): EmailDesignerEmailTemplateEntityResponseCollection
   banner(id: ID): BannerEntityResponse
   banners(filters: BannerFiltersInput, pagination: PaginationArg = {}, sort: [String] = [], publicationState: PublicationState = LIVE): BannerEntityResponseCollection
   category(id: ID): CategoryEntityResponse
@@ -1120,6 +1253,8 @@ type Query {
   game(id: ID): GameEntityResponse
   games(filters: GameFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): GameEntityResponseCollection
   home(publicationState: PublicationState = LIVE): HomeEntityResponse
+  order(id: ID): OrderEntityResponse
+  orders(filters: OrderFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): OrderEntityResponseCollection
   platform(id: ID): PlatformEntityResponse
   platforms(filters: PlatformFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): PlatformEntityResponseCollection
   publisher(id: ID): PublisherEntityResponse
@@ -1137,6 +1272,9 @@ type Mutation {
   createUploadFolder(data: UploadFolderInput!): UploadFolderEntityResponse
   updateUploadFolder(id: ID!, data: UploadFolderInput!): UploadFolderEntityResponse
   deleteUploadFolder(id: ID!): UploadFolderEntityResponse
+  createEmailDesignerEmailTemplate(data: EmailDesignerEmailTemplateInput!): EmailDesignerEmailTemplateEntityResponse
+  updateEmailDesignerEmailTemplate(id: ID!, data: EmailDesignerEmailTemplateInput!): EmailDesignerEmailTemplateEntityResponse
+  deleteEmailDesignerEmailTemplate(id: ID!): EmailDesignerEmailTemplateEntityResponse
   createBanner(data: BannerInput!): BannerEntityResponse
   updateBanner(id: ID!, data: BannerInput!): BannerEntityResponse
   deleteBanner(id: ID!): BannerEntityResponse
@@ -1151,6 +1289,9 @@ type Mutation {
   deleteGame(id: ID!): GameEntityResponse
   updateHome(data: HomeInput!): HomeEntityResponse
   deleteHome: HomeEntityResponse
+  createOrder(data: OrderInput!): OrderEntityResponse
+  updateOrder(id: ID!, data: OrderInput!): OrderEntityResponse
+  deleteOrder(id: ID!): OrderEntityResponse
   createPlatform(data: PlatformInput!): PlatformEntityResponse
   updatePlatform(id: ID!, data: PlatformInput!): PlatformEntityResponse
   deletePlatform(id: ID!): PlatformEntityResponse
