@@ -10,6 +10,8 @@ import {
 } from '../../graphql/generated/QueryHome';
 import { QueryWishlist_wishlists_data_attributes_games } from 'graphql/generated/QueryWishlist';
 
+import { QueryOrders_orders_data } from 'graphql/generated/QueryOrders';
+
 export const bannerMapper = (banners: QueryHome_banners) => {
   return banners!.data.map((banner) => ({
     img: `http://localhost:1337${
@@ -82,5 +84,40 @@ export const cartMapper = (games: QueryGames | undefined) => {
         title: game.attributes!.name,
         price: formatPrice(game.attributes!.price),
       }))
+    : [];
+};
+
+export const ordersMapper = (
+  orders: QueryOrders_orders_data[] | undefined | null,
+) => {
+  //
+  return orders
+    ? orders.map((order) => {
+        return {
+          id: order.id,
+          paymentInfo: {
+            flag: order.attributes?.card_brand,
+            img: order.attributes?.card_brand
+              ? `/img/cards/${order.attributes?.card_brand}.png`
+              : null,
+            number: order.attributes?.card_last4
+              ? `**** **** **** ${order.attributes?.card_last4}`
+              : 'Free Game',
+            purchaseDate: `Purchase made on ${new Intl.DateTimeFormat('en-US', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric',
+            }).format(new Date(order.attributes?.createdAt))}`,
+          },
+          games: order.attributes?.games?.data.map((game) => ({
+            id: game.id,
+            title: game.attributes?.name,
+            downloadLink:
+              'https://wongames.com/game/download/yuYT56Tgh431LkjhNBgdf',
+            img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
+            price: formatPrice(game.attributes!.price),
+          })),
+        };
+      })
     : [];
 };
