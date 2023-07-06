@@ -61,8 +61,14 @@ const GameItem = ({
         <S.PaymentContent>
           <p>{paymentInfo.purchaseDate}</p>
           <S.CardInfo>
-            <span>{paymentInfo.number}</span>
-            <img src={paymentInfo.img} alt={paymentInfo.flag} />
+            {price !== '$0.00' ? (
+              <>
+                <span>{paymentInfo.number}</span>
+                <img src={paymentInfo.img} alt={paymentInfo.flag} />
+              </>
+            ) : (
+              <p>Free Game</p>
+            )}
           </S.CardInfo>
         </S.PaymentContent>
       )}
