@@ -5,8 +5,8 @@ import { useCart } from 'hooks/use-cart';
 
 export type PaymentInfoProps = {
   number: string;
-  flag: string;
-  img: string;
+  flag: string | null;
+  img: string | null;
   purchaseDate: string;
 };
 
@@ -64,7 +64,9 @@ const GameItem = ({
             {price !== '$0.00' ? (
               <>
                 <span>{paymentInfo.number}</span>
-                <img src={paymentInfo.img} alt={paymentInfo.flag} />
+                {!!paymentInfo.img && !!paymentInfo.flag && (
+                  <img src={paymentInfo.img} alt={paymentInfo.flag} />
+                )}
               </>
             ) : (
               <p>Free Game</p>
