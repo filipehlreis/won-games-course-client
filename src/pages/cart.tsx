@@ -28,8 +28,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   });
 
   const recommended = data.recommended?.data?.attributes?.section;
-  // console.log('()())()(())(()()())( session do cart props', session);
-  // const accessToken = '1111';
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const objeto: any = session;
 

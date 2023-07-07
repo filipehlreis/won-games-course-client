@@ -3,7 +3,6 @@ import { getSession } from 'next-auth/react';
 
 async function protectedRoutes(context: GetServerSidePropsContext) {
   const session = await getSession(context);
-  console.log('session', session);
 
   if (!session) {
     context.res.writeHead(302, {
@@ -18,8 +17,6 @@ async function protectedRoutes(context: GetServerSidePropsContext) {
 
     // context.res.statusCode = 302;
   }
-
-  console.log('session', session);
 
   return session;
 }

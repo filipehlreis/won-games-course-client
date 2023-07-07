@@ -12,16 +12,9 @@ export type BaseTemplateProps = {
 const Base = ({ children }: BaseTemplateProps) => {
   const { data: session, status } = useSession();
 
-  // console.log('status da base', status);
-
   // useEffect(() => {
   //   const sessions2 = session;
-  //   console.log('session do useeffect', sessions2);
-  //   console.log('status do useeffect', status);
   // }, [session, status]);
-
-  // console.log('session da base', session);
-  // console.log('<>><><><><><><session da base<>><><>????????', session);
 
   return (
     <S.Wrapper>

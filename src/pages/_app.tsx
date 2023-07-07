@@ -20,7 +20,6 @@ function App({
 }: AppProps<{ session: Session }>) {
   // const client = useApollo(pageProps.initialApolloState);
   const client = useApollo(pageProps);
-  // console.log('session do _app', session);
 
   return (
     <AuthProvider session={session}>

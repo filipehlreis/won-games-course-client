@@ -37,11 +37,8 @@ const options: AuthOptions = {
 
         const data = await response.json();
 
-        // console.log('data do login', data);
-
         if (data.user) {
           const objeto = { ...data.user, jwt: data.jwt };
-          // console.log('objeto', objeto);
           return objeto;
         } else {
           return null;
@@ -56,15 +53,11 @@ const options: AuthOptions = {
       if (account) {
         token.accessToken = account.access_token;
         token.username = user.username;
-        // console.log('account.access_token do token', account.access_token);
       }
       if (user) {
         token.accessToken = await user.jwt;
       }
 
-      // console.log('token do token', token);
-      // console.log('account do token', account);
-      // console.log('user do token', user);
       return token;
     },
     async session({ session, token }: GenericObject) {
@@ -74,8 +67,6 @@ const options: AuthOptions = {
 
       session.user.name = token.username;
 
-      // console.log('token do session', token);
-      // console.log('session do session', session);
       return session;
     },
 

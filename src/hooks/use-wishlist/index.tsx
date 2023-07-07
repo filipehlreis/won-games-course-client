@@ -37,9 +37,6 @@ export type WishlistProviderProps = {
 const WishlistProvider = ({ children }: WishlistProviderProps) => {
   const { data: session, status } = useSession();
   const [wishlistId, setWishlistId] = useState<string | null>();
-  // console.log('session', session);
-  // console.log('status', status);
-
   const [wishlistItems, setWishlistItems] =
     useState<QueryWishlist_wishlists_data_attributes_games>({
       __typename: 'GameRelationResponseCollection',
@@ -75,40 +72,14 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
     },
   });
 
-  // console.info(
-  //   '<<<<<primeira impressao de data >>>>>',
-  //   JSON.stringify(data, null, 2),
-  // );
-
-  // console.log('loading', loading);
   useEffect(() => {
     const gameObject: QueryWishlist_wishlists_data_attributes_games = {
       __typename: 'GameRelationResponseCollection',
       data: [],
     };
-    // console.log('data dentro do useeffect', data);
-    // console.info(
-    //   'data dentro do useeffect info >>>>>>',
-    //   JSON.stringify(data, null, 2),
-    // );
-    // console.info(
-    //   'dentro do useeffect info para o setwishlistItems >>>>>>',
-    //   JSON.stringify(
-    //     data?.wishlists?.data[0]?.attributes?.games?.data,
-    //     null,
-    //     2,
-    //   ),
-    // );
     setWishlistItems(data?.wishlists?.data[0]?.attributes?.games || gameObject);
-    // console.info(
-    //   'dentro do useeffect info para o wishlistItems >>>>>>',
-    //   JSON.stringify(wishlistItems, null, 2),
-    // );
     setWishlistId(data?.wishlists?.data[0]?.id);
-    // console.log('status', status);
-    // console.log('session', session);
-    // console.log('wishlistItems', wishlistItems);
-    // console.log('wishlistId', wishlistId);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, status, session, wishlistId]);
 
@@ -122,15 +93,8 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
 
   const addToWishlist = (id: string) => {
     // se nao existir wishlist -> cria
-    // console.log(
-    //   'wishlistIds>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',
-    //   wishlistIds,
-    // );
-    // console.log('session', session);
-    // console.log('id >>>>>>', id, 'tipo de id', typeof id);
     if (!wishlistId) {
       const gamesToAdd = [...wishlistIds, id];
-      // console.log('gamesToAdd', gamesToAdd);
       return createList({
         variables: {
           input: {
@@ -139,6 +103,7 @@ const WishlistProvider = ({ children }: WishlistProviderProps) => {
         },
       });
     }
+
     // senao, atualiza a wishlist existente
     return updateList({
       variables: {

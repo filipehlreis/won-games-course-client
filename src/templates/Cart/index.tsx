@@ -33,9 +33,6 @@ const Cart = ({
   recommendedGames,
   recommendedHighlight,
 }: CartProps) => {
-  // console.log('++++++++++++++++++session do cart', session);
-  // console.log('++++++++++++++++++accessToken do cart', accessToken);
-
   return (
     <Base>
       <Container>

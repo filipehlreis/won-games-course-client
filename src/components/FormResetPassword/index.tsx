@@ -55,24 +55,15 @@ export const FormResetPassword = () => {
     const data = await response.json();
 
     if (data.error) {
-      // console.log('Error', data);
       setFormError(data.error.message);
       setLoading(false);
     } else {
-      // console.log('Sucess', data);
-      // console.log('email', data.user.email);
       signIn('credentials', {
         email: data.user.email,
         password: values.password,
         callbackUrl: '/',
       });
     }
-
-    // const result = await signIn('credentials', {
-    //   ...values,
-    //   redirect: false,
-    //   callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`,
-    // });
   };
 
   return (

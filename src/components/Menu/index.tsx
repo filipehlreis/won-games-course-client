@@ -20,7 +20,6 @@ export type MenuProps = {
 
 const Menu = ({ username, loading }: MenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  // console.log('username', username);
 
   return (
     <S.Wrapper>

@@ -31,14 +31,9 @@ const PaymentForm = ({ accessToken }: PaymentFormProps) => {
   const [disabled, setDisabled] = useState(true);
   const [freeGames, setFreeGames] = useState(false);
 
-  console.log('items.length fora do effect', items.length);
-  // console.log('accessToken fora use effect\n', accessToken);
-
   useEffect(() => {
     async function setPaymentMode() {
-      // console.log('items.length', await items.length);
       if (items.length) {
-        // console.log('accessToken dentro do use effect\n', accessToken);
         // bater na API /orders/create-payment-intent
         // enviar os itens do carrinho
 
@@ -46,8 +41,6 @@ const PaymentForm = ({ accessToken }: PaymentFormProps) => {
           items,
           token: `${accessToken!}`,
         });
-
-        // console.log('accessToken <><><><>???????', accessToken);
 
         // se eu receber freeGames: true => setFreeGames(true) e faco o fluxo de jogo gratuito
         if (data.freeGames) {
@@ -66,7 +59,6 @@ const PaymentForm = ({ accessToken }: PaymentFormProps) => {
         // senao,  o paymentIntent foi valido
         // setClientSecrete
         await setClientSecret(data.client_secret);
-        console.log('clientsecret: ', data.client_secret);
       }
     }
 
@@ -123,7 +115,6 @@ const PaymentForm = ({ accessToken }: PaymentFormProps) => {
 
       // redirecionar para a pagina de sucesso
       push('/success');
-      console.log('Deu bom');
     }
   };
 

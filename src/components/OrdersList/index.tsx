@@ -15,8 +15,6 @@ export type OrdersListProps = {
 };
 
 const OrdersList = ({ items = [] }: OrdersListProps) => {
-  console.log('items >>> <<<< >>> <<<', items);
-
   return (
     <S.Wrapper>
       <Heading lineBottom lineColor="primary" color="black" size="small">

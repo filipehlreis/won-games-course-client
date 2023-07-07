@@ -61,7 +61,6 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
 
   const handleShowMore = () => {
     const currentLength = data!.games!.data!.length || 0;
-    console.log('currentLength', currentLength);
 
     // https://stackoverflow.com/questions/62558430/how-does-fetchmore-return-data-to-the-component
     fetchMore({
@@ -79,15 +78,10 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
       updateQuery: (previousResult, { fetchMoreResult }): QueryGames => {
         if (!fetchMoreResult) return previousResult;
 
-        // console.log('currentLength', currentLength);
-
         const previousData: QueryGames_games_data[] =
           previousResult.games?.data || data.games?.data || [];
-        // console.log('previousData,:', previousData);
 
         const newData = fetchMoreResult.games?.data || [];
-
-        // console.log('newData,:', newData);
 
         const newMeta = fetchMoreResult.games!.meta;
 
@@ -104,8 +98,6 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
             data: newUniqueData,
           },
         };
-
-        console.log('objectGames', objectGames);
 
         return objectGames;
       },

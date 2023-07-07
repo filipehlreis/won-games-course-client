@@ -16,22 +16,15 @@ function createApolloClient(session?: GenericObject | null) {
     uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
   });
 
-  // console.log('session do apollo', session);
-
   const authLink = setContext(
     async (_, { headers, session: clientSession }) => {
-      // console.log('client do apollo', clientSession);
       const jwt =
         (await session?.accessToken) ||
         (await clientSession?.accessToken) ||
         (await clientSession?.jwt) ||
         '';
       const authorization = jwt ? `Bearer ${jwt}` : '';
-      // console.log('jwt', jwt);
-      // console.log('acesstokwn', session?.accessToken);
-      // console.log('session', session);
 
-      // console.log('authorization >>>>> ', authorization);
       return { headers: { ...headers, authorization } };
     },
   );
@@ -100,7 +93,6 @@ export function initializeApollo(initialState = {}, session?: Session | null) {
     apolloClientGlobal.cache.restore(initialState);
   }
 
-  // console.log('session da inicializacao >>>>>', session);
   // sempre inicializando no SSR com cache limpo
   if (typeof window === 'undefined') return apolloClientGlobal;
 
@@ -115,6 +107,5 @@ export function useApollo(initialState = {}, session?: Session) {
     [initialState, session],
   );
 
-  // console.log('session da useapollo >>>>>', session);
   return store;
 }

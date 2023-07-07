@@ -43,8 +43,6 @@ export const FormSignIn = () => {
       redirect: false,
       callbackUrl: `${window.location.origin}${query?.callbackUrl || ''}`,
     });
-    // console.log('result do signin', result);
-    console.log('><><><><><><><><><><><><result do signin', result);
 
     if (result?.url) {
       return push(result.url);
