@@ -51,12 +51,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     variables: {
       identifier: data_getid.usersPermissionsUsers?.data[0].id as string,
     },
+    fetchPolicy: 'no-cache',
   });
 
   return {
     props: {
       items: ordersMapper(data.orders?.data),
-      session,
     },
   };
 }

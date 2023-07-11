@@ -428,8 +428,8 @@ describe('<GameCardSlider />', () => {
         margin: 0 -0.8rem;
       }
 
-      .c0 span.slick-prev,
-      .c0 span.slick-next {
+      .c0 .slick-prev,
+      .c0 .slick-next {
         display: block;
         color: #FAFAFA;
         cursor: pointer;
