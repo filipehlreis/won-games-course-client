@@ -29,6 +29,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const apolloClient = initializeApollo({}, session);
 
+  if (!session) {
+    return { props: {} };
+  }
+
   const { data: data_getid } = await apolloClient.query<
     QueryGetIDFromUserFilter,
     QueryGetIDFromUserFilterVariables
