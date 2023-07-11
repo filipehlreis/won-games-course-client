@@ -35,7 +35,7 @@ export const Wrapper = styled.section<WrapperProps>`
 
     `}
 
-    .slick-prev, .slick-next {
+    span.slick-prev, span.slick-next {
       display: block;
       color: ${theme.colors[color!]};
       cursor: pointer;
@@ -49,10 +49,12 @@ export const Wrapper = styled.section<WrapperProps>`
 
     .slick-prev {
       left: -${theme.spacings.xxlarge};
+      color: ${theme.colors[color!]};
     }
 
     .slick-next {
       right: -${theme.spacings.xxlarge};
+      color: ${theme.colors[color!]};
     }
 
     .slick-prev.slick-disabled,

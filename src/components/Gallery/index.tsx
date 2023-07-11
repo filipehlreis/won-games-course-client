@@ -12,8 +12,8 @@ const commonSettings: SliderSettings = {
   arrows: true,
   infinite: false,
   lazyLoad: 'ondemand',
-  nextArrow: <ArrowRight aria-label="next image" />,
-  prevArrow: <ArrowLeft aria-label="previous image " />,
+  nextArrow: <ArrowRight aria-label="next games" />,
+  prevArrow: <ArrowLeft aria-label="previous games" />,
 };
 
 const settings: SliderSettings = {
