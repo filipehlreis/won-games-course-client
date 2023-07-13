@@ -11,12 +11,11 @@ import {
 import { QueryWishlist_wishlists_data_attributes_games } from 'graphql/generated/QueryWishlist';
 
 import { QueryOrders_orders_data } from 'graphql/generated/QueryOrders';
+import { getImageUrl } from 'utils/getImageUrl';
 
 export const bannerMapper = (banners: QueryHome_banners) => {
   return banners!.data.map((banner) => ({
-    img: `http://localhost:1337${
-      banner.attributes!.image.data?.attributes?.url
-    }`,
+    img: `${getImageUrl(banner.attributes!.image.data?.attributes?.url)}`,
     title: banner.attributes!.title,
     subtitle: banner.attributes!.subtitle,
     buttonLabel: banner.attributes!.button?.label,
@@ -47,9 +46,7 @@ export const gamesMapper = (
         title: game.attributes!.name,
         slug: game.attributes!.slug,
         developer: game.attributes!.developers!.data[0].attributes!.name,
-        img: `http://localhost:1337${
-          game.attributes!.cover?.data!.attributes!.url
-        }`,
+        img: `${getImageUrl(game.attributes!.cover?.data!.attributes!.url)}`,
         price: game.attributes!.price,
       }))
     : [];
@@ -65,8 +62,12 @@ export const highlightMapper = (
     ? {
         title: highlight.title,
         subtitle: highlight.subtitle,
-        backgroundImage: `http://localhost:1337${highlight.background.data?.attributes?.url}`,
-        floatImage: `http://localhost:1337${highlight.floatImage?.data?.attributes?.url}`,
+        backgroundImage: `${getImageUrl(
+          highlight.background.data?.attributes?.url,
+        )}`,
+        floatImage: `${getImageUrl(
+          highlight.floatImage?.data?.attributes?.url,
+        )}`,
         buttonLabel: highlight.buttonLabel,
         buttonLink: highlight.buttonLink,
         alignment: highlight.alignment,
@@ -78,9 +79,7 @@ export const cartMapper = (games: QueryGames | undefined) => {
   return games?.games
     ? games.games.data.map((game) => ({
         id: game.id!,
-        img: `http://localhost:1337${
-          game.attributes!.cover!.data!.attributes?.url
-        }`,
+        img: `${getImageUrl(game.attributes!.cover!.data!.attributes?.url)}`,
         title: game.attributes!.name,
         price: formatPrice(game.attributes!.price),
       }))
@@ -115,7 +114,9 @@ export const ordersMapper = (
             title: game.attributes?.name,
             downloadLink:
               'https://wongames.com/game/download/yuYT56Tgh431LkjhNBgdf',
-            img: `http://localhost:1337${game.attributes?.cover?.data?.attributes?.url}`,
+            img: `${getImageUrl(
+              game.attributes?.cover?.data?.attributes?.url,
+            )}`,
             price: formatPrice(game.attributes!.price),
           })),
         };
