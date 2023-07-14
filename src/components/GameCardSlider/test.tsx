@@ -548,6 +548,7 @@ describe('<GameCardSlider />', () => {
                             class="c9"
                           >
                             <button
+                              aria-label="Add to Wishlist"
                               class="c10"
                             >
                               <svg
@@ -579,11 +580,11 @@ describe('<GameCardSlider />', () => {
                               $215.00
                             </div>
                             <button
+                              aria-label="Add to cart"
                               class="c14"
                             >
                               <svg
                                 aria-hidden="true"
-                                aria-label="Add to cart"
                                 class="c2"
                                 fill="currentColor"
                                 focusable="false"
@@ -643,6 +644,7 @@ describe('<GameCardSlider />', () => {
                             class="c9"
                           >
                             <button
+                              aria-label="Add to Wishlist"
                               class="c10"
                             >
                               <svg
@@ -674,11 +676,11 @@ describe('<GameCardSlider />', () => {
                               $215.00
                             </div>
                             <button
+                              aria-label="Add to cart"
                               class="c14"
                             >
                               <svg
                                 aria-hidden="true"
-                                aria-label="Add to cart"
                                 class="c2"
                                 fill="currentColor"
                                 focusable="false"
@@ -738,6 +740,7 @@ describe('<GameCardSlider />', () => {
                             class="c9"
                           >
                             <button
+                              aria-label="Add to Wishlist"
                               class="c10"
                             >
                               <svg
@@ -769,11 +772,11 @@ describe('<GameCardSlider />', () => {
                               $215.00
                             </div>
                             <button
+                              aria-label="Add to cart"
                               class="c14"
                             >
                               <svg
                                 aria-hidden="true"
-                                aria-label="Add to cart"
                                 class="c2"
                                 fill="currentColor"
                                 focusable="false"
@@ -833,6 +836,7 @@ describe('<GameCardSlider />', () => {
                             class="c9"
                           >
                             <button
+                              aria-label="Add to Wishlist"
                               class="c10"
                             >
                               <svg
@@ -864,11 +868,11 @@ describe('<GameCardSlider />', () => {
                               $215.00
                             </div>
                             <button
+                              aria-label="Add to cart"
                               class="c14"
                             >
                               <svg
                                 aria-hidden="true"
-                                aria-label="Add to cart"
                                 class="c2"
                                 fill="currentColor"
                                 focusable="false"

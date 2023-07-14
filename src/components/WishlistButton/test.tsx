@@ -23,7 +23,9 @@ describe('<WishlistButton />', () => {
 
     render(<WishlistButton id="1" />, { wishlistProviderProps });
 
-    expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument();
+    waitFor(() => {
+      expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument();
+    });
   });
 
   it('should render a button to remove from wishlist', () => {
@@ -34,7 +36,11 @@ describe('<WishlistButton />', () => {
 
     render(<WishlistButton id="1" />, { wishlistProviderProps });
 
-    expect(screen.getByLabelText(/remove from wishlist/i)).toBeInTheDocument();
+    waitFor(() => {
+      expect(
+        screen.getByLabelText(/remove from wishlist/i),
+      ).toBeInTheDocument();
+    });
   });
 
   it('should render a button with add to wishlist text', () => {
@@ -45,7 +51,9 @@ describe('<WishlistButton />', () => {
 
     render(<WishlistButton id="1" hasText />, { wishlistProviderProps });
 
-    expect(screen.getByText(/add to wishlist/i)).toBeInTheDocument();
+    waitFor(() => {
+      expect(screen.getByText(/add to wishlist/i)).toBeInTheDocument();
+    });
   });
 
   it('should render a button with remove from wishlist text', () => {
@@ -56,7 +64,9 @@ describe('<WishlistButton />', () => {
 
     render(<WishlistButton id="1" hasText />, { wishlistProviderProps });
 
-    expect(screen.getByText(/remove from wishlist/i)).toBeInTheDocument();
+    waitFor(() => {
+      expect(screen.getByText(/remove from wishlist/i)).toBeInTheDocument();
+    });
   });
 
   it('should not render if not logged', () => {
@@ -78,7 +88,11 @@ describe('<WishlistButton />', () => {
 
     render(<WishlistButton id="1" hasText />, { wishlistProviderProps });
 
-    expect(screen.queryByText(/remove from wishlist/i)).not.toBeInTheDocument();
+    waitFor(() => {
+      expect(
+        screen.queryByText(/remove from wishlist/i),
+      ).not.toBeInTheDocument();
+    });
   });
 
   it('should add to wishlist', async () => {

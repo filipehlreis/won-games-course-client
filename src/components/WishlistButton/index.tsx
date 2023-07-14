@@ -33,6 +33,7 @@ const WishlistButton = ({
 
   return (
     <Button
+      aria-label={ButtonText}
       icon={
         loading ? (
           <Spinner />

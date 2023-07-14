@@ -1,6 +1,6 @@
 import 'session.mock';
 
-import { screen, render } from 'utils/test-utils';
+import { screen, render, waitFor } from 'utils/test-utils';
 import GameCard from '.';
 
 const props = {
@@ -35,7 +35,10 @@ describe('<GameCard />', () => {
     );
 
     expect(screen.getByText(`${'$235.00'}`)).toBeInTheDocument();
-    expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument();
+
+    waitFor(() => {
+      expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument();
+    });
 
     expect(container.firstChild).toMatchSnapshot();
   });

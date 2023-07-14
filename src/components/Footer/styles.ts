@@ -27,10 +27,10 @@ export const Column = styled.div`
     a,
     span {
       display: block;
-      color: ${theme.colors.gray};
+      color: ${theme.colors.black};
       text-decoration: none;
       margin-bottom: ${theme.spacings.xxsmall};
-      font-size: ${theme.font.sizes.small};
+      font-size: ${theme.font.sizes.medium};
     }
     a:hover {
       text-decoration: underline;
@@ -40,8 +40,8 @@ export const Column = styled.div`
 
 export const Copyright = styled.div`
   ${({ theme }) => css`
-    color: ${theme.colors.gray};
-    font-size: ${theme.font.sizes.xsmall};
+    color: ${theme.colors.black};
+    font-size: ${theme.font.sizes.medium};
     margin-top: ${theme.spacings.large};
     margin-bottom: ${theme.spacings.medium};
     text-align: center;
