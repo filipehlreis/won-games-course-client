@@ -10,6 +10,7 @@
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "postinstall": "husky install",
     "test": "jest",
+    "cy:open": "cypress open",
     "test:ci": "jest --runInBand",
     "test:silent": "jest --watchAll --silent --noStackTrace",
     "test:coverage": "jest --coverage --silent --noStackTrace",

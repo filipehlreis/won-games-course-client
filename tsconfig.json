@@ -28,7 +28,8 @@
   ],
   "exclude": [
     "node_modules",
-    ".next"
+    ".next",
+    "cypress"
   ],
   "types": ["node", "jest", "@testing-library/jest-dom"],
   "experimentalDecorators": true,
