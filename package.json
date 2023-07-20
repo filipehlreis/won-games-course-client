@@ -12,6 +12,7 @@
     "test": "jest",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
+    "test:e2e": "start-server-and-test dev 3000 cy:open",
     "test:ci": "jest --runInBand",
     "test:silent": "jest --watchAll --silent --noStackTrace",
     "test:coverage": "jest --coverage --silent --noStackTrace",
@@ -117,6 +118,7 @@
     "plop": "^3.1.2",
     "prettier": "2.7.1",
     "react-is": "^18.2.0",
+    "start-server-and-test": "^2.0.0",
     "ts-jest": "^29.0.3",
     "typescript": "^4.9.5"
   },
