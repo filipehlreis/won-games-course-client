@@ -11,6 +11,7 @@
     "postinstall": "husky install",
     "test": "jest",
     "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "test:ci": "jest --runInBand",
     "test:silent": "jest --watchAll --silent --noStackTrace",
     "test:coverage": "jest --coverage --silent --noStackTrace",
