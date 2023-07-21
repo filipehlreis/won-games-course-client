@@ -209,6 +209,7 @@ exports[`<GameCard /> should render the heading 1`] = `
 
 <article
   class="c0"
+  data-cy="game-card"
 >
   <a
     class="c1"

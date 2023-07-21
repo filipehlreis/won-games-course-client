@@ -515,6 +515,7 @@ describe('<GameCardSlider />', () => {
                     <div>
                       <article
                         class="c3"
+                        data-cy="game-card"
                       >
                         <a
                           class="c4"
@@ -611,6 +612,7 @@ describe('<GameCardSlider />', () => {
                     <div>
                       <article
                         class="c3"
+                        data-cy="game-card"
                       >
                         <a
                           class="c4"
@@ -707,6 +709,7 @@ describe('<GameCardSlider />', () => {
                     <div>
                       <article
                         class="c3"
+                        data-cy="game-card"
                       >
                         <a
                           class="c4"
@@ -803,6 +806,7 @@ describe('<GameCardSlider />', () => {
                     <div>
                       <article
                         class="c3"
+                        data-cy="game-card"
                       >
                         <a
                           class="c4"
