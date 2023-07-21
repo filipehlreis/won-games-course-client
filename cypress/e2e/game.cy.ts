@@ -1,9 +1,10 @@
 
 describe('Game Page', () => {
-  it('should render game page sections', () => {
+  beforeEach(() => {
     cy.visit('/game/cyberpunk_2077')
+  })
 
-
+  it('should render game page sections', () => {
     cy.getByDataCy('game-info').within(() => {
       cy.findByRole('heading', { name: /Cyberpunk 2077/i }).should('exist');
       cy.findByText(/^This game is part of your Welcome Offer!/i).should('exist');
@@ -38,5 +39,22 @@ describe('Game Page', () => {
 
     cy.shouldRenderShowcase({ name: 'Upcoming Games', highlight: true }).should('exist')
     cy.shouldRenderShowcase({ name: 'You may like these games!!!', highlight: false }).should('exist')
+  });
+
+  it('should add/remove game in cart', () => {
+    cy.getByDataCy('game-info').within(() => {
+      cy.findByRole('button', { name: /add to cart/i }).click();
+
+      cy.findByRole('button', { name: /remove from cart/i }).should('exist')
+    });
+
+    cy.findAllByLabelText(/cart items/i)
+      .first()
+      .should('have.text', '1')
+      .click();
+
+    cy.getByDataCy('cart-list').within(() => {
+      cy.findByRole('heading', { name: /Cyberpunk 2077/i }).should('exist')
+    })
   });
 });
