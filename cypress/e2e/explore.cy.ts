@@ -16,17 +16,11 @@ describe('Explore Page', () => {
     cy.findByRole('heading', { name: /platforms/i }).should('exist')
     cy.findByRole('heading', { name: /genres/i }).should('exist')
 
-    sortFields.map(({ label }) => {
-      cy.findByText(label).should('exist');
-    })
-    priceFields.map(({ label }) => {
-      cy.findByText(label).should('exist');
-    })
-    platformFields.map(({ label }) => {
-      cy.findByText(label).should('exist');
-    })
-    genreFields.map(({ label }) => {
-      cy.findByText(label).should('exist');
-    })
+
+    cy.getFields(sortFields);
+    cy.getFields(priceFields);
+    cy.getFields(platformFields);
+    cy.getFields(genreFields);
+
   })
 })
