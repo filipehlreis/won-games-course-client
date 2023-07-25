@@ -4,5 +4,12 @@
   "extends": [
     "plugin:cypress/recommended"
   ],
-  "env": {"cypress/globals" : true}
+  "env": {"cypress/globals" : true},
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
 }
