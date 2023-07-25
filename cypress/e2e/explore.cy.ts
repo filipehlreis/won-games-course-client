@@ -23,4 +23,12 @@ describe('Explore Page', () => {
     cy.getFields(genreFields);
 
   })
+
+  it('should show 15 games and show more games when show more is clicked', () => {
+    cy.visit('/games');
+
+    cy.getByDataCy('game-card').should('have.length', 15);
+    cy.findByRole('button', { name: /show more/i }).click()
+    cy.getByDataCy('game-card').should('have.length', 30);
+  })
 })
