@@ -43,5 +43,18 @@ declare namespace Cypress {
      * @example cy.shouldRenderShowcase({name: 'Showcase', highlight: true})
      */
     shouldRenderShowcase(attrs: ShowcaseAttributes): Chainable<Element>
+
+    /**
+     * Custom command to check value is less than price
+     * @example cy.shouldBeLessThan(100)
+     */
+    shouldBeLessThan(value: number): Chainable<Element>
+
+    /**
+     * Custom command to check value is greather than price
+     * @example cy.shouldBeGreaterThan(50)
+     */
+    shouldBeGreaterThan(value: number): Chainable<Element>
+
   }
 }
