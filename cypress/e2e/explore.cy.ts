@@ -1,3 +1,4 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
 import { genreFields, platformFields, priceFields, sortFields } from '../../src/utils/filter/fields';
 
 
@@ -94,5 +95,47 @@ describe('Explore Page', () => {
     cy.getByDataCy('game-card').first().within(() => {
       cy.shouldBeLessThan(600);
     })
+  })
+
+  it('should filter by platform and genre', () => {
+    cy.visit('/games');
+
+    cy.findByText(/windows/i).click()
+    cy.wait(500)
+    cy.location('href').should('contain', 'platforms=windows')
+
+    cy.findByText(/linux/i).click()
+    cy.wait(500)
+    cy.location('href').should('contain', 'platforms=linux')
+
+    cy.findByText(/mac os/i).click()
+    cy.wait(500)
+    cy.location('href').should('contain', 'platforms=mac')
+
+    cy.findByText(/action/i).click()
+    cy.wait(500)
+    cy.location('href').should('contain', 'categories=action')
+
+  })
+
+  it('should return empty when no games match', () => {
+    cy.visit('/games');
+
+
+    cy.findByText(/free/i).click()
+    cy.wait(500)
+    cy.location('href').should('contain', 'price=0')
+
+    cy.findByText(/linux/i).click()
+    cy.wait(500)
+    cy.location('href').should('contain', 'platforms=linux')
+
+    cy.findByText(/horror/i).click()
+    cy.wait(500)
+    cy.location('href').should('contain', 'categories=horror')
+
+    cy.getByDataCy('game-card').should('not.exist')
+    cy.findByText(/We didn't find any games with this filter/i).should('exist')
+
   })
 })
