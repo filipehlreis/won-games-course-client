@@ -116,3 +116,23 @@ Cypress.Commands.add('signUp', (user) => {
   cy.findByRole('button', { name: /sign up now/i }).click()
 
 })
+
+Cypress.Commands.add('signIn', (email = 'e2e@wongames.com.br', password = '123456') => {
+  cy.url().should('contain', `${Cypress.config().baseUrl}/sign-in`)
+  cy.findByPlaceholderText(/email/i).type(email)
+  cy.findByPlaceholderText(/^password/i).type(password)
+
+  cy.findByRole('button', { name: /sign in now/i }).click()
+  cy.url().should('eq', `${Cypress.config().baseUrl}/`)
+
+})
+
+
+Cypress.Commands.add('signOut', (username = 'e2euser') => {
+
+  cy.findByText(username).should('exist').click()
+  cy.findByText(/sign out/i).click()
+
+  cy.findByRole('link', { name: /sign in/i }).should('exist')
+  cy.findByText(username).should('not.exist')
+})
