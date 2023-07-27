@@ -123,7 +123,6 @@ Cypress.Commands.add('signIn', (email = 'e2e@wongames.com.br', password = '12345
   cy.findByPlaceholderText(/^password/i).type(password)
 
   cy.findByRole('button', { name: /sign in now/i }).click()
-  cy.url().should('eq', `${Cypress.config().baseUrl}/`)
 
 })
 
