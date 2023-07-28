@@ -20,7 +20,7 @@ describe('Forgot Password', () => {
   it('should fill the input with an invalid email and receive an error', () => {
     // interceptar a chamada
     // retornar um erro
-    cy.intercept('POST', '**/auth/forgot-password', res => {
+    cy.intercept('POST', '**/api/auth/forgot-password', res => {
       res.reply({
         statusCode: 400,
         body: {
