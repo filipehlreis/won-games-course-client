@@ -135,3 +135,15 @@ Cypress.Commands.add('signOut', (username = 'e2euser') => {
   cy.findByRole('link', { name: /sign in/i }).should('exist')
   cy.findByText(username).should('not.exist')
 })
+
+Cypress.Commands.add('addToCartByIndex', (index) => {
+  cy.getByDataCy('game-card').eq(index).within(() => {
+    cy.findByRole('button', { name: /^add to cart/i }).click()
+  })
+})
+
+Cypress.Commands.add('removeFromCartByIndex', (index) => {
+  cy.getByDataCy('game-card').eq(index).within(() => {
+    cy.findByRole('button', { name: /^remove from cart/i }).click()
+  })
+})
