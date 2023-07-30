@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES5",
     "lib": ["ES5", "DOM"],
-    "types": ["cypress", "@testing-library/cypress"]
+    "types": ["cypress", "@testing-library/cypress", "cypress-plugin-stripe-elements"]
   },
   "include": ["**/*.ts"]
 
